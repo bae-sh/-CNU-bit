@@ -6,7 +6,6 @@ import styled from "styled-components";
 const navList = [
   { path: "/myStock", pathName: "myStock", name: "My자산" },
   { path: "/coin", pathName: "coin", name: "코인" },
-  { path: "/stock", pathName: "stock", name: "주식" },
   { path: "/rank", pathName: "rank", name: "랭킹" },
   { path: "/menual", pathName: "menual", name: "이용안내" },
 ];
@@ -19,7 +18,7 @@ const Header = styled.header`
   align-items: center;
   width: 100%;
   height: 70px;
-  background-color: #fcf0c8;
+  background-color: #fff;
   box-shadow: 0 0 10px -5px #303030;
   z-index: 1000; //z축 순서
   /* -webkit-backdrop-filter: blur(10px); */
@@ -38,10 +37,10 @@ const FlexBox = styled.div`
 const Logo = styled.div`
   font-size: 35px;
   font-family: "Arimo", sans-serif;
-  font-weight: 700;
+  font-weight: 900;
   font-style: italic;
   width: 200px;
-  color: #911f27;
+  color: #3c78c8;
 `;
 
 const Gnb = styled.div`
@@ -59,8 +58,8 @@ const NavGroup = styled.ul`
 
 const NavLink = styled.li`
   margin-left: 40px;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 800;
+  font-size: 18px;
 
   &:hover {
     padding-bottom: 2px;
@@ -118,7 +117,7 @@ export default withRouter(
                   });
                 }}
               >
-                CNU Bank
+                CNU bit
               </Link>
             </Logo>
             <Gnb isOn={isOn} isBtn={isBtn}>
