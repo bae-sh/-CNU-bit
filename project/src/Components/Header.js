@@ -4,10 +4,10 @@ import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 const navList = [
-  { path: "/myStock", pathName: "myStock", name: "My자산" },
-  { path: "/coin", pathName: "coin", name: "코인" },
-  { path: "/rank", pathName: "rank", name: "랭킹" },
-  { path: "/menual", pathName: "menual", name: "이용안내" },
+  { path: "/MyStock", pathName: "myStock", name: "My자산" },
+  { path: "/Coin", pathName: "coin", name: "코인" },
+  { path: "/Ranking", pathName: "Ranking", name: "랭킹" },
+  { path: "/Menual", pathName: "menual", name: "이용안내" },
 ];
 
 const Header = styled.header`

@@ -38,54 +38,6 @@ import { getCoinData } from "../../api";
 // trade_timestamp: 1631457739000;
 // trade_volume: 0.00492042;
 
-const notice = [
-  {
-    title:
-      "공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항",
-    link: "/board",
-  },
-  {
-    title:
-      "공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항",
-    link: "/board",
-  },
-  {
-    title:
-      "공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항",
-    link: "/board",
-  },
-  {
-    title:
-      "공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항",
-    link: "/board",
-  },
-  {
-    title:
-      "공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항",
-    link: "/board",
-  },
-  {
-    title:
-      "공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항",
-    link: "/board",
-  },
-];
-
-const file = [
-  {
-    title: "2021-07-06 데이터 파일.xlsx",
-    link: "/board",
-  },
-  {
-    title: "2021-07-05 데이터 파일.xlsx",
-    link: "/board",
-  },
-  {
-    title: "2021-07-04 데이터 파일.xlsx",
-    link: "/board",
-  },
-];
-
 const marketSelection = {
   "KRW-BTC": "비트코인",
   "KRW-ETH": "이더리움",
@@ -116,15 +68,7 @@ export default () => {
   const { coinData } = useCoinData();
 
   if (coinData.code) {
-    // console.log(coinData.code);
     coinList[coinData.code] = coinData;
   }
-  return (
-    <Presenter
-      notice={notice}
-      file={file}
-      coinData={Object.values(coinList)}
-      maxCoinData={Object.values(marketSelection).length}
-    />
-  );
+  return <Presenter coinData={Object.values(coinList)} />;
 };
