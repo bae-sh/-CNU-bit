@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, { useState } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
@@ -20,9 +20,7 @@ const Header = styled.header`
   height: 70px;
   background-color: #fff;
   box-shadow: 0 0 10px -5px #303030;
-  z-index: 1000; //z축 순서
-  /* -webkit-backdrop-filter: blur(10px); */
-  /* backdrop-filter: blur(7px); */
+  z-index: 1000; //z축 순서 스크롤해도 최상위 유지
 
   @media only screen and (max-width: 900px) {
     width: 900px;
@@ -45,18 +43,18 @@ const Logo = styled.div`
 
 const Gnb = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
 `;
 
-const NavGroup = styled.ul`
+const NavGroup = styled.div`
   display: flex;
   align-items: center;
-  padding-left: 80px;
+  margin-left: 40px;
+  margin-right: 300px;
 `;
 
-const NavLink = styled.li`
+const NavLink = styled.div`
   margin-left: 40px;
   font-weight: 800;
   font-size: 18px;
@@ -67,105 +65,51 @@ const NavLink = styled.li`
   }
 `;
 
-const LoginBox = styled.ul`
+const LoginBox = styled.div`
   display: flex;
   align-items: center;
-  & > li:nth-child(2) {
-    margin-left: 30px;
-  }
 `;
 
-export default withRouter(
-  ({
-    history: {
-      location: { pathname },
-    },
-  }) => {
-    const isRoot = pathname === "/";
+export default withRouter(() => {
+  return (
+    <>
+      <Header>
+        <FlexBox className="inner">
+          <Logo>
+            <Link to="/" onClick={() => {}}>
+              CNU bit
+            </Link>
+          </Logo>
 
-    const useHome = () => {
-      const [menuOn, setMenuOn] = useState({
-        isOn: false,
-        isBtn: false,
-      });
-
-      const handleMenuBtn = (value) => {
-        setMenuOn(value);
-      };
-
-      return {
-        menuOn,
-        handleMenuBtn,
-      };
-    };
-
-    const {
-      menuOn: { isOn, isBtn },
-      handleMenuBtn,
-    } = useHome();
-    return (
-      <>
-        <Header isRoot={isRoot}>
-          <FlexBox className="inner">
-            <Logo isRoot={isRoot}>
-              <Link
-                to="/"
-                onClick={() => {
-                  handleMenuBtn({
-                    isOn: false,
-                    isBtn: false,
-                  });
-                }}
-              >
-                CNU bit
-              </Link>
-            </Logo>
-            <Gnb isOn={isOn} isBtn={isBtn}>
-              <NavGroup>
-                {navList.map(({ path, pathName, name }, idx) => (
-                  <NavLink
-                    isRoot={isRoot}
-                    isCurrent={pathname.includes(pathName)}
-                    isNav={true}
-                    key={idx}
-                  >
-                    <Link
-                      to={path}
-                      onClick={() => {
-                        handleMenuBtn({
-                          isOn: false,
-                          isBtn: false,
-                        });
-                      }}
-                    >
-                      {name}
-                    </Link>
-                  </NavLink>
-                ))}
-              </NavGroup>
-              <LoginBox>
-                <NavLink
-                  isRoot={isRoot}
-                  isCurrent={pathname === "/login"}
-                  isNav={false}
-                >
-                  <Link
-                    to="/login"
-                    onClick={() => {
-                      handleMenuBtn({
-                        isOn: false,
-                        isBtn: false,
-                      });
-                    }}
-                  >
-                    로그인
+          <Gnb>
+            <NavGroup>
+              {navList.map(({ path, name }, idx) => (
+                <NavLink key={idx}>
+                  <Link to={path} onClick={() => {}}>
+                    {name}
                   </Link>
                 </NavLink>
-              </LoginBox>
-            </Gnb>
-          </FlexBox>
-        </Header>
-      </>
-    );
-  }
-);
+              ))}
+            </NavGroup>
+
+            <LoginBox>
+              <NavLink>
+                <Link to="/login" onClick={() => {}}>
+                  로그인
+                </Link>
+              </NavLink>
+            </LoginBox>
+
+            <LoginBox>
+              <NavLink>
+                <Link to="/signup" onClick={() => {}}>
+                  회원가입
+                </Link>
+              </NavLink>
+            </LoginBox>
+          </Gnb>
+        </FlexBox>
+      </Header>
+    </>
+  );
+});

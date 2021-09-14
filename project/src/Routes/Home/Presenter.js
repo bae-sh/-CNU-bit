@@ -137,6 +137,10 @@ const CoinData = styled.div`
   }
   & > span {
     margin-left: 14px;
+    & > text {
+      font-size: 20px;
+      margin-left: 5px;
+    }
   }
 `;
 
@@ -184,11 +188,12 @@ export default ({ notice, file, coinData }) => {
                   </CoinData>
                   <CoinData current={Math.sign(rate) >= 0}>
                     <text>전일대비: </text>
-                    {rate >= 0 ? "+" : "-"}
+                    {rate >= 0 ? "+" : ""}
                     {rate}%
                     <span>
                       {rate >= 0 ? "+" : "-"}
                       {textChangePrice}
+                      <text>KRW</text>
                     </span>
                   </CoinData>
                 </DataBox>
@@ -196,41 +201,41 @@ export default ({ notice, file, coinData }) => {
             );
           })}
         </div>
-
-        <div className="inner">
-          <NoticeBox>
-            <h3>랭킹</h3>
-            <ul>
-              {file.map(({ title, link }, idx) => {
-                if (idx < MAX_FILE) {
-                  return (
-                    <li key={idx}>
-                      <Link to={link}>
-                        <Dot>·</Dot>
-                        {title}
-                      </Link>
-                    </li>
-                  );
-                }
-              })}
-            </ul>
-            <ul>
-              {notice.map(({ title, link }, idx) => {
-                if (idx < MAX_NOTICE) {
-                  return (
-                    <li key={idx}>
-                      <Link to={link}>
-                        <Dot>·</Dot>
-                        {title}
-                      </Link>
-                    </li>
-                  );
-                }
-              })}
-            </ul>
-          </NoticeBox>
-        </div>
       </DataContainer>
+
+      <div className="inner">
+        <NoticeBox>
+          <h3>랭킹</h3>
+          <ul>
+            {file.map(({ title, link }, idx) => {
+              if (idx < MAX_FILE) {
+                return (
+                  <li key={idx}>
+                    <Link to={link}>
+                      <Dot>·</Dot>
+                      {title}
+                    </Link>
+                  </li>
+                );
+              }
+            })}
+          </ul>
+          <ul>
+            {notice.map(({ title, link }, idx) => {
+              if (idx < MAX_NOTICE) {
+                return (
+                  <li key={idx}>
+                    <Link to={link}>
+                      <Dot>·</Dot>
+                      {title}
+                    </Link>
+                  </li>
+                );
+              }
+            })}
+          </ul>
+        </NoticeBox>
+      </div>
     </Main>
   );
 };

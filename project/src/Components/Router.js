@@ -17,7 +17,7 @@ import Home from "../Routes/Home";
 // import SubmitForm from "../Routes/Submit/Form";
 // import SubmitStatus from "../Routes/Submit/Status";
 // import News from "../Routes/News";
-// import Login from "../Routes/Login";
+import Login from "../Routes/Login";
 // import Content from "../Components/Content";
 // import NewsDetail from "../Routes/News/Detail.js";
 // import NoticeDetail from "../Routes/Notice/Detail.js";
@@ -28,13 +28,14 @@ export default () => (
     <main>
       <Switch>
         <Route path="/" component={Home} exact />
+
+        <Route path="/Login" component={Login} exact />
         {/* <Route path="/intro" component={Intro} exact />
         <Route path="/coin" component={Coin} exact />
         <Route path="/leaderboard" component={LeaderBoard} exact />
         <Route path="/notice" component={Notice} exact />
         <Route path="/question" component={Question} exact />
         <Route path="/news" component={News} exact />
-        <Route path="/login" component={Login} exact />
         <Route path="/submit/form" component={SubmitForm} exact />
         <Route path="/submit/status" component={SubmitStatus} exact />
         <Route path="/news/:id" component={NewsDetail} exact />

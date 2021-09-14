@@ -36,8 +36,7 @@ const GlobalStyles = createGlobalStyle`
     main {
         padding-top: 70px;
         min-height: calc(100vh - 120px);
-
-        background-color: #e9ebf0;
+        background-color: #E9EAE9;
     }
 
     .inner {
