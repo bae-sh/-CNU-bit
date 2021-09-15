@@ -5,9 +5,8 @@ import styled from "styled-components";
 const Main = styled.div`
   background-color: #ffffff;
   width: 100%;
-  margin: 100px auto;
+  margin: auto;
   flex: 1;
-  min-height: 900px;
   padding: 100px;
 
   & > h1 {
@@ -45,10 +44,12 @@ const Row = styled.tr`
         } else if (rate === 0) {
           return "black";
         } else {
-          console.log(rate);
           return "blue";
         }
       }};
+    }
+    &:first-child {
+      font-weight: 500;
     }
   }
 `;
@@ -74,10 +75,10 @@ export default ({ coinData }) => (
       <h1>코인</h1>
       <hr></hr>
 
-      <h2>My현금 : 100,000,000</h2>
+      <h2>My현금 : 100,000,000 원</h2>
       <Table>
         <Row>
-          <th>자산</th>
+          <th>코인</th>
           <th>실시간 시세</th>
           <th>변동률</th>
           <th>고가</th>
@@ -86,6 +87,7 @@ export default ({ coinData }) => (
           <th>매도</th>
         </Row>
         {coinData.map((coin, idx) => {
+          console.log(coin);
           const name = coin["korean_name"];
           const rate = coin["signed_change_rate"].toFixed(3);
           const price = String(coin["trade_price"]);
@@ -97,14 +99,14 @@ export default ({ coinData }) => (
           let textChangeHighPrice = changeText(high_price);
           let textChangeLowPrice = changeText(low_price);
           return (
-            <Row rate={rate}>
+            <Row rate={rate} index={idx}>
               <td>{name}</td>
-              <td>{textPrice}</td>
-              <td>{`${rate > 0 ? `+` : ``}${textChangePrice}(${
+              <td>{`${textPrice} 원`}</td>
+              <td>{`${rate > 0 ? `+` : `-`}${textChangePrice} 원(${
                 rate > 0 ? `+` : ``
-              }${rate})`}</td>
-              <td>{textChangeHighPrice}</td>
-              <td>{textChangeLowPrice}</td>
+              }${rate}%)`}</td>
+              <td>{`${textChangeHighPrice} 원`}</td>
+              <td>{`${textChangeLowPrice} 원`}</td>
               <td>
                 <Button color="#F75467">매수</Button>
               </td>

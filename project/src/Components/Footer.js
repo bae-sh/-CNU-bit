@@ -5,7 +5,7 @@ import FooterLogo from "../img/footer_logo.jpg";
 
 const Footer = styled.footer`
   width: 100%;
-  height: 120px;
+  height: 150px;
   background-color: #3c404c;
   display: flex;
   align-items: center;

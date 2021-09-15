@@ -41,8 +41,14 @@ import { getCoinData } from "../../api";
 const marketSelection = {
   "KRW-BTC": "비트코인",
   "KRW-ETH": "이더리움",
-  "KRW-DOGE": "도지코인",
+  "KRW-LTC": "라이트코인",
   "KRW-XRP": "리플",
+  "KRW-ETC": "이더리움클래식",
+  "KRW-QTUM": "퀀텀",
+  "KRW-STEEM": "스팀",
+  "KRW-ARDR": "아더",
+  "KRW-REP": "어거",
+  "KRW-DOGE": "도지코인",
 };
 const coinList = {};
 
@@ -59,7 +65,6 @@ export default () => {
     useEffect(() => {
       getData();
     }, []);
-
     return {
       coinData,
     };
@@ -69,6 +74,8 @@ export default () => {
 
   if (coinData.code) {
     coinList[coinData.code] = coinData;
+
+    console.log(coinData);
   }
   return <Presenter coinData={Object.values(coinList)} />;
 };
