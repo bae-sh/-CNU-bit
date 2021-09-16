@@ -21,8 +21,8 @@ export default () => {
     id: "bae",
     cash: 100000000,
     coin: {
-      "KRW-BTC": { name: "비트코인", boughtPrice: 500000, quantity: 10 },
-      "KRW-ETH": { name: "이더리움", boughtPrice: 123123, quantity: 2 },
+      "KRW-BTC": { name: "비트코인", boughtPrice: 50000000, quantity: 10 },
+      "KRW-ETH": { name: "이더리움", boughtPrice: 1231230, quantity: 2 },
       "KRW-DOGE": { name: "도지코인", boughtPrice: 123123, quantity: 2 },
       "KRW-XRP": { name: "리플", boughtPrice: 123123, quantity: 3 },
       "KRW-LTC": { name: "라이트코인", boughtPrice: 123123, quantity: 4 },

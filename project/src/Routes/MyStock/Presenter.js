@@ -41,8 +41,8 @@ const Row = styled.tr`
   & > td {
     padding: 20px;
     text-align: center;
-    &:nth-child(2),
-    :nth-child(3) {
+    &:nth-child(5),
+    :nth-child(6) {
       color: ${({ rate }) => {
         if (rate > 0) {
           return "red";
@@ -64,6 +64,7 @@ const Button = styled.button`
   padding: 5px 10px;
   background-color: ${({ color }) => color};
 `;
+
 function changeText(price) {
   let textPrice = "";
   for (let i = 1; i <= price.length; i++) {
@@ -74,8 +75,9 @@ function changeText(price) {
   }
   return textPrice;
 }
+
 function getMyAsset(userInfo, coinData) {
-  var myAsset = 0;
+  var myAsset = userInfo.cash;
   {
     coinData.map((coin) => {
       myAsset +=
@@ -84,9 +86,11 @@ function getMyAsset(userInfo, coinData) {
   }
   return myAsset;
 }
+
 export default ({ userInfo, setUserInfo, coinData }) => {
   var myAsset = changeText(String(getMyAsset(userInfo, coinData)));
   const myCash = changeText(String(userInfo.cash));
+
   const getMyCoin = () => {
     const result = [];
     const myCoin = Object.values(userInfo["coin"]);
@@ -102,14 +106,13 @@ export default ({ userInfo, setUserInfo, coinData }) => {
       if (coin["quantity"] === 0) continue;
 
       const profit = coinPrice[i] - myCoin[i]["boughtPrice"];
-      const rate = (
-        (coinPrice[i] - myCoin[i]["boughtPrice"]) /
-        coin["boughtPrice"]
-      ).toFixed(3);
+      const boughtAvgPrice = coin["boughtPrice"] / coin["quantity"];
+      const rate = ((coinPrice[i] / boughtAvgPrice - 1) * 100).toFixed(3);
       result.push(
-        <Row>
+        <Row rate={rate}>
           <td>{coin["name"]}</td>
           <td>{`${changeText(String(coinPrice[i]))} 원`}</td>
+          <td>{`${changeText(String(boughtAvgPrice))} 원`}</td>
           <td>{`${changeText(String(coin["boughtPrice"]))} 원`}</td>
           <td>{`${rate >= 0 ? "+" : "-"}${changeText(
             String(Math.abs(profit))
@@ -127,6 +130,7 @@ export default ({ userInfo, setUserInfo, coinData }) => {
     }
     return result;
   };
+
   return (
     <div class="inner">
       <Main>
@@ -139,6 +143,7 @@ export default ({ userInfo, setUserInfo, coinData }) => {
             <th>코인</th>
             <th>실시간 시세</th>
             <th>매입가</th>
+            <th>매입총액</th>
             <th>평가손익</th>
             <th>수익률</th>
             <th>수량</th>
