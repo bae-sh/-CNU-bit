@@ -19,9 +19,9 @@ import Ranking from "../Routes/Ranking";
 export default () => {
   const [userInfo, setUserInfo] = useState({
     id: "bae",
-    cash: 100000000,
+    cash: 500000000,
     coin: {
-      "KRW-BTC": { name: "비트코인", boughtPrice: 50000000, quantity: 10 },
+      "KRW-BTC": { name: "비트코인", boughtPrice: 40000000, quantity: 1 },
       "KRW-ETH": { name: "이더리움", boughtPrice: 1231230, quantity: 2 },
       "KRW-DOGE": { name: "도지코인", boughtPrice: 123123, quantity: 2 },
       "KRW-XRP": { name: "리플", boughtPrice: 123123, quantity: 3 },

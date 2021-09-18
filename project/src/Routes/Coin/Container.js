@@ -52,7 +52,7 @@ const marketSelection = {
 };
 const coinList = {};
 
-export default () => {
+export default ({ userInfo, setUserInfo }) => {
   const useCoinData = () => {
     const [coinData, setCoinData] = useState({});
     const getData = async () => {
@@ -74,8 +74,12 @@ export default () => {
 
   if (coinData.code) {
     coinList[coinData.code] = coinData;
-
-    console.log(coinData);
   }
-  return <Presenter coinData={Object.values(coinList)} />;
+  return (
+    <Presenter
+      userInfo={userInfo}
+      setUserInfo={setUserInfo}
+      coinData={Object.values(coinList)}
+    />
+  );
 };

@@ -116,7 +116,7 @@ export default () => {
   const { coinData } = useCoinData();
 
   if (coinData.code) {
-    // console.log(coinData.code);
+    // console.log(coinList);
     coinList[coinData.code] = coinData;
   }
   return (

@@ -1,3 +1,5 @@
+//반응형 , php로 유저 정보 저장, 회원가입, 리팩토링 ,api 공부
+
 import React from "react";
 import Router from "./Router";
 import GlobalStyles from "./GlobalStyles";
