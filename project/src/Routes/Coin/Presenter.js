@@ -41,7 +41,7 @@ const Row = styled.tr`
       color: ${({ rate }) => {
         if (rate > 0) {
           return "red";
-        } else if (rate === 0) {
+        } else if (rate == 0) {
           return "black";
         } else {
           return "blue";
@@ -160,7 +160,7 @@ export default ({ userInfo, setUserInfo, coinData }) => (
             <Row rate={rate} index={idx}>
               <td>{coinName}</td>
               <td>{`${changeText(String(coinPrice))} 원`}</td>
-              <td>{`${rate > 0 ? `+` : `-`}${changeText(
+              <td>{`${rate >= 0 ? `+` : `-`}${changeText(
                 String(coin["change_price"])
               )} 원(${rate > 0 ? `+` : ``}${rate}%)`}</td>
               <td>{`${changeText(String(coin["high_price"]))} 원`}</td>
