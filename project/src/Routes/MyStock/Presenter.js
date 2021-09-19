@@ -116,7 +116,7 @@ const buyCoin = (
   setUserInfo,
   coinName
 ) => {
-  let curUserInfo = userInfo;
+  let curUserInfo = { ...userInfo };
   if (coinPrice * amount > curUserInfo["cash"]) {
     alert("현금이 부족합니다.");
   } else {
