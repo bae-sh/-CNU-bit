@@ -1,6 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useState, useEffect } from "react";
-import { getCoinData } from "../api";
 import {
   BrowserRouter as Router,
   Route,
@@ -60,8 +59,8 @@ export default () => {
             )}
             exact
           />
+          <Route path="/Ranking" render={() => <Ranking />} exact />
           <Route path="/Menual" render={() => <Menual />} exact />
-          <Route path="/Ranking" redner={() => <Ranking />} exact />
           <Redirect to="/" />
         </Switch>
       </main>

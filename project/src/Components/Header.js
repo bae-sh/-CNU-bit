@@ -6,7 +6,7 @@ import styled from "styled-components";
 const navList = [
   { path: "/MyStock", pathName: "myStock", name: "My자산" },
   { path: "/Coin", pathName: "coin", name: "코인" },
-  { path: "/Ranking", pathName: "Ranking", name: "랭킹" },
+  { path: "/Ranking", pathName: "menual", name: "랭킹" },
   { path: "/Menual", pathName: "menual", name: "이용안내" },
 ];
 

@@ -36,7 +36,7 @@ const Content = styled.div`
     }
   }
 `;
-export default ({}) => {
+export default () => {
   return (
     <div class="inner">
       <Main>
