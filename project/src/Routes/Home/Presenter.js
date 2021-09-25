@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import homeImg from "../../img/main.png";
 
 const Main = styled.div`
-  background-color: #f9fafc;
+  background-color: red;
 `;
 
 const MainContainer = styled.div`
@@ -65,6 +65,7 @@ const NoticeBox = styled.div`
   margin-right: 60px;
   width: 100%;
   margin-bottom: 60px;
+  background-color: green;
   & > ul:not(:last-child) {
     border-bottom: 1px solid #a0a0a0;
     padding-bottom: 20px;
