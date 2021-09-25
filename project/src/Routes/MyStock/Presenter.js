@@ -2,6 +2,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import changeText from "../../Functions/changeText";
+import BuySellButton from "../../Components/BuySellButton";
 const Main = styled.div`
   background-color: #ffffff;
   width: 100%;
@@ -59,98 +61,16 @@ const Row = styled.tr`
     }
   }
 `;
-const Button = styled.button`
-  font-size: 15px;
-  border-radius: 10px;
-  padding: 5px 10px;
-  background-color: ${({ color }) => color};
-`;
-
-function changeText(price) {
-  let textPrice = "";
-  for (let i = 1; i <= price.length; i++) {
-    textPrice = price[price.length - i] + textPrice;
-    if (i % 3 === 0 && i !== price.length) {
-      textPrice = "," + textPrice;
-    }
-  }
-  return textPrice;
-}
 
 function getMyAsset(userInfo, coinData) {
   var myAsset = userInfo.cash;
-  {
-    coinData.map((coin) => {
-      myAsset +=
-        coin["trade_price"] * userInfo["coin"][`${coin["code"]}`]["quantity"];
-    });
-  }
+  coinData.map((coin) => {
+    myAsset +=
+      coin["trade_price"] * userInfo["coin"][`${coin["code"]}`]["quantity"];
+  });
   return myAsset;
 }
-const handlePrompt = (
-  current,
-  coinPrice,
-  coinCode,
-  userInfo,
-  setUserInfo,
-  coinName
-) => {
-  let text = current === "buy" ? "매수" : "매도";
-  let amount = prompt(`${text}수량을 입력하시오.`);
-  if (amount === null) {
-  } else if (isNaN(amount) || amount <= 0) {
-    alert("0보다 큰 숫자만 입력 가능합니다.");
-  } else if (amount > 0) {
-    current === "buy"
-      ? buyCoin(amount, coinPrice, coinCode, userInfo, setUserInfo, coinName)
-      : sellCoin(amount, coinPrice, coinCode, userInfo, setUserInfo, coinName);
-  }
-  return amount;
-};
 
-const buyCoin = (
-  amount,
-  coinPrice,
-  coinCode,
-  userInfo,
-  setUserInfo,
-  coinName
-) => {
-  let curUserInfo = { ...userInfo };
-  if (coinPrice * amount > curUserInfo["cash"]) {
-    alert("현금이 부족합니다.");
-  } else {
-    curUserInfo["cash"] -= coinPrice * amount;
-    curUserInfo["coin"][coinCode]["boughtPrice"] += coinPrice * amount;
-    curUserInfo["coin"][coinCode]["quantity"] += Number(amount);
-    setUserInfo(curUserInfo);
-    alert(`${coinName}을 ${amount}개 매수하였습니다. `);
-  }
-};
-const sellCoin = (
-  amount,
-  coinPrice,
-  coinCode,
-  userInfo,
-  setUserInfo,
-  coinName
-) => {
-  let curUserInfo = userInfo;
-  if (amount > curUserInfo["coin"][coinCode]["quantity"]) {
-    alert(
-      `${coinName} 보유 수량(${curUserInfo["coin"][coinCode]["quantity"]})보다 많습니다.`
-    );
-  } else {
-    curUserInfo["cash"] += coinPrice * amount;
-    curUserInfo["coin"][coinCode]["boughtPrice"] -=
-      (curUserInfo["coin"][coinCode]["boughtPrice"] /
-        curUserInfo["coin"][coinCode]["quantity"]) *
-      amount;
-    curUserInfo["coin"][coinCode]["quantity"] -= Number(amount);
-    setUserInfo(curUserInfo);
-    alert(`${coinName}을 ${amount}개 매도하였습니다. `);
-  }
-};
 export default ({ userInfo, setUserInfo, coinData }) => {
   var myAsset = changeText(String(getMyAsset(userInfo, coinData)));
   const myCash = changeText(String(userInfo["cash"]));
@@ -171,11 +91,11 @@ export default ({ userInfo, setUserInfo, coinData }) => {
       "KRW-ARDR": 0,
       "KRW-REP": 0,
     };
-    {
-      coinData.map((coin) => {
-        coinPrices[coin["code"]] = coin["trade_price"];
-      });
-    }
+
+    coinData.map((coin) => {
+      coinPrices[coin["code"]] = coin["trade_price"];
+    });
+
     for (let i = 0; i < myCoin.length; i++) {
       const coin = myCoin[i];
       const coinName = coin["name"];
@@ -199,38 +119,24 @@ export default ({ userInfo, setUserInfo, coinData }) => {
           <td>{`${String(rate)}%`}</td>
           <td>{`${coinQuantity}`}</td>
           <td>
-            <Button
-              color="#F75467"
-              onClick={() => {
-                handlePrompt(
-                  "buy",
-                  coinPrice,
-                  coinCode,
-                  userInfo,
-                  setUserInfo,
-                  coinName
-                );
-              }}
-            >
-              매수
-            </Button>
+            {BuySellButton(
+              "buy",
+              coinPrice,
+              coinCode,
+              userInfo,
+              setUserInfo,
+              coinName
+            )}
           </td>
           <td>
-            <Button
-              color="#4386F9"
-              onClick={() => {
-                handlePrompt(
-                  "sell",
-                  coinPrice,
-                  coinCode,
-                  userInfo,
-                  setUserInfo,
-                  coinName
-                );
-              }}
-            >
-              매도
-            </Button>
+            {BuySellButton(
+              "sell",
+              coinPrice,
+              coinCode,
+              userInfo,
+              setUserInfo,
+              coinName
+            )}
           </td>
         </Row>
       );

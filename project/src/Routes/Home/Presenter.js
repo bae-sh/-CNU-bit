@@ -1,12 +1,13 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 import homeImg from "../../img/main.png";
 
+import changeText from "../../Functions/changeText";
+import Ranking from "../../Components/Ranking";
 const Main = styled.div`
-  background-color: red;
+  background-color: #fff;
 `;
 
 const MainContainer = styled.div`
@@ -62,50 +63,16 @@ const DataContainer = styled.div`
 `;
 
 const NoticeBox = styled.div`
-  margin-right: 60px;
-  width: 100%;
+  margin: auto;
+  width: 90%;
   margin-bottom: 60px;
-  background-color: green;
-  & > ul:not(:last-child) {
-    border-bottom: 1px solid #a0a0a0;
-    padding-bottom: 20px;
+  box-shadow: 0px 5px 15px -5px #000;
+  & > h3 {
+    font-size: 30px;
   }
-
-  & > ul {
-    padding-top: 20px;
-    width: 100%;
-
-    & > li {
-      color: #595959;
-      width: 100%;
-      font-size: 15px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      word-wrap: break-word;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      line-height: 1.5;
-    }
-
-    & > li:hover {
-      font-weight: 600;
-    }
-
-    & > li:not(:last-child) {
-      margin-bottom: 5px;
-    }
-  }
-
   @media only screen and (max-width: 800px) {
     margin-right: 0;
     margin-bottom: 60px;
-
-    & > ul > li {
-      @media only screen and (max-width: 800px) {
-        font-size: 13px;
-      }
-    }
   }
 `;
 
@@ -113,11 +80,6 @@ const DataBox = styled.div`
   margin-bottom: 30px;
 `;
 
-const Dot = styled.span`
-  font-size: 15px;
-  font-weight: 700;
-  margin-right: 5px;
-`;
 const CoinName = styled.div`
   font-size: 35px;
   font-weight: 500;
@@ -145,10 +107,28 @@ const CoinData = styled.div`
   }
 `;
 
-const MAX_NOTICE = 4;
-const MAX_FILE = 2;
+const Table = styled.table`
+  width: 100%;
+  border: 1px solid #ededed;
+`;
 
-export default ({ notice, file, coinData }) => {
+const Row = styled.tr`
+  border-bottom: 1px solid #ededed;
+  &:first-child {
+    background-color: #f9f9f9;
+    & > th {
+      padding: 20px;
+    }
+  }
+  & > td {
+    padding: 15px;
+    font-size: 17px;
+    text-align: center;
+    vertical-align: middle;
+  }
+`;
+
+export default ({ userRanking, coinData }) => {
   return (
     <Main>
       <MainContainer>
@@ -160,24 +140,8 @@ export default ({ notice, file, coinData }) => {
           {coinData.map((coin, idx) => {
             const name = coin["korean_name"];
             const rate = (coin["signed_change_rate"] * 100).toFixed(3);
-            const price = String(coin["trade_price"]);
-            const change_price = String(coin["change_price"]);
-            let textPrice = "";
-            let textChangePrice = "";
-            for (let i = 1; i <= price.length; i++) {
-              textPrice = price[price.length - i] + textPrice;
-              if (i % 3 === 0 && i !== price.length) {
-                textPrice = "," + textPrice;
-              }
-            }
-
-            for (let i = 1; i <= change_price.length; i++) {
-              textChangePrice =
-                change_price[change_price.length - i] + textChangePrice;
-              if (i % 3 === 0 && i !== change_price.length) {
-                textChangePrice = "," + textChangePrice;
-              }
-            }
+            const coinPrice = coin["trade_price"];
+            const change_price = coin["change_price"];
 
             return (
               <div key={idx}>
@@ -185,7 +149,7 @@ export default ({ notice, file, coinData }) => {
                   <CoinName current={Math.sign(rate) >= 0}>{name}</CoinName>
                   <CoinData current={Math.sign(rate) >= 0}>
                     <text>현재가: </text>
-                    {textPrice} <text>KRW</text>
+                    {`${changeText(String(coinPrice))} 원`} <text>KRW</text>
                   </CoinData>
                   <CoinData current={Math.sign(rate) >= 0}>
                     <text>전일대비: </text>
@@ -193,7 +157,7 @@ export default ({ notice, file, coinData }) => {
                     {rate}%
                     <span>
                       {rate >= 0 ? "+" : "-"}
-                      {textChangePrice}
+                      {`${changeText(String(change_price))}`}
                       <text>KRW</text>
                     </span>
                   </CoinData>
@@ -206,35 +170,7 @@ export default ({ notice, file, coinData }) => {
 
       <div className="inner">
         <NoticeBox>
-          <h3>랭킹</h3>
-          <ul>
-            {file.map(({ title, link }, idx) => {
-              if (idx < MAX_FILE) {
-                return (
-                  <li key={idx}>
-                    <Link to={link}>
-                      <Dot>·</Dot>
-                      {title}
-                    </Link>
-                  </li>
-                );
-              }
-            })}
-          </ul>
-          <ul>
-            {notice.map(({ title, link }, idx) => {
-              if (idx < MAX_NOTICE) {
-                return (
-                  <li key={idx}>
-                    <Link to={link}>
-                      <Dot>·</Dot>
-                      {title}
-                    </Link>
-                  </li>
-                );
-              }
-            })}
-          </ul>
+          <Ranking userRanking={userRanking} viewIdx={4} />
         </NoticeBox>
       </div>
     </Main>
