@@ -170,7 +170,7 @@ export default ({ userRanking, coinData }) => {
 
       <div className="inner">
         <NoticeBox>
-          <Ranking userRanking={userRanking} viewIdx={4} />
+          <Ranking userRanking={userRanking} viewIdx={5} />
         </NoticeBox>
       </div>
     </Main>

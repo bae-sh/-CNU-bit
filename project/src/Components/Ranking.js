@@ -32,7 +32,7 @@ const Ranking = ({ userRanking, viewIdx }) => {
         <th>수익률</th>
       </Row>
       {userRanking.map((userInfo, index) => {
-        if (viewIdx === 0 || index <= viewIdx) {
+        if (viewIdx === 0 || index < viewIdx) {
           return (
             <Row key={index}>
               <td>{medalImage(index + 1)}</td>

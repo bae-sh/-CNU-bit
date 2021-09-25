@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import Presenter from "./Presenter";
-import React from "react";
+import React, { useEffect } from "react";
 import getCoinDataList from "../../Functions/getCoinDataList";
 
 const marketSelection = {
