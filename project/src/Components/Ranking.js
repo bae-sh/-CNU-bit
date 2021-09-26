@@ -5,6 +5,7 @@ import changeText from "../Functions/changeText";
 const Table = styled.table`
   width: 100%;
   border: 1px solid #ededed;
+  margin-top: 50px;
 `;
 
 const Row = styled.tr`

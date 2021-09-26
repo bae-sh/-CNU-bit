@@ -24,8 +24,6 @@ function getCoinDataList(marketSelection) {
   if (coinData.code) {
     coinList[coinData.code] = coinData;
   }
-  console.log(marketSelection);
-  console.log(coinData);
   return Object.values(coinList);
 }
 

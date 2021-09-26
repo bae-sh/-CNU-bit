@@ -32,7 +32,7 @@ const MainImg = styled.img`
 const DataContainer = styled.div`
   width: 100%;
   background-color: #fff;
-  padding: 50px 0;
+  margin-top: 30px;
   & > .inner {
     display: flex;
     flex-wrap: wrap;
@@ -91,8 +91,6 @@ const CoinData = styled.div`
   color: ${({ current }) => (current ? "#d60000" : "#0062df")};
   margin: 30px 0;
   & > text {
-    //KRW
-
     font-size: 20px;
   }
   & > text:first-child {
@@ -104,27 +102,6 @@ const CoinData = styled.div`
       font-size: 20px;
       margin-left: 5px;
     }
-  }
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border: 1px solid #ededed;
-`;
-
-const Row = styled.tr`
-  border-bottom: 1px solid #ededed;
-  &:first-child {
-    background-color: #f9f9f9;
-    & > th {
-      padding: 20px;
-    }
-  }
-  & > td {
-    padding: 15px;
-    font-size: 17px;
-    text-align: center;
-    vertical-align: middle;
   }
 `;
 
@@ -142,28 +119,29 @@ export default ({ userRanking, coinData }) => {
             const rate = (coin["signed_change_rate"] * 100).toFixed(3);
             const coinPrice = coin["trade_price"];
             const change_price = coin["change_price"];
-
-            return (
-              <div key={idx}>
-                <DataBox>
-                  <CoinName current={Math.sign(rate) >= 0}>{name}</CoinName>
-                  <CoinData current={Math.sign(rate) >= 0}>
-                    <text>현재가: </text>
-                    {`${changeText(String(coinPrice))} 원`} <text>KRW</text>
-                  </CoinData>
-                  <CoinData current={Math.sign(rate) >= 0}>
-                    <text>전일대비: </text>
-                    {rate >= 0 ? "+" : ""}
-                    {rate}%
-                    <span>
-                      {rate >= 0 ? "+" : "-"}
-                      {`${changeText(String(change_price))}`}
-                      <text>KRW</text>
-                    </span>
-                  </CoinData>
-                </DataBox>
-              </div>
-            );
+            if (idx < 4) {
+              return (
+                <div key={idx}>
+                  <DataBox>
+                    <CoinName current={Math.sign(rate) >= 0}>{name}</CoinName>
+                    <CoinData current={Math.sign(rate) >= 0}>
+                      <text>현재가: </text>
+                      {`${changeText(String(coinPrice))} 원`} <text>KRW</text>
+                    </CoinData>
+                    <CoinData current={Math.sign(rate) >= 0}>
+                      <text>전일대비: </text>
+                      {rate >= 0 ? "+" : ""}
+                      {rate}%
+                      <span>
+                        {rate >= 0 ? "+" : "-"}
+                        {`${changeText(String(change_price))}`}
+                        <text>KRW</text>
+                      </span>
+                    </CoinData>
+                  </DataBox>
+                </div>
+              );
+            }
           })}
         </div>
       </DataContainer>

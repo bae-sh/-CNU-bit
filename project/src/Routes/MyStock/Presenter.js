@@ -63,7 +63,7 @@ const Row = styled.tr`
 `;
 
 function getMyAsset(userInfo, coinData) {
-  var myAsset = userInfo.cash;
+  var myAsset = userInfo["cash"];
   coinData.map((coin) => {
     myAsset +=
       coin["trade_price"] * userInfo["coin"][`${coin["code"]}`]["quantity"];
