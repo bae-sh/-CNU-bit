@@ -55,6 +55,7 @@ const resetData = (userInfo) => {
             quantity: 0,
         },
     };
+    localStorage.removeItem("id");
     return curUserInfo;
 };
 export default resetData;

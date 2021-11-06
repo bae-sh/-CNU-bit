@@ -1,5 +1,14 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
 const getUserInfo = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        let ob = JSON.parse(localStorage.getItem("id"));
+        if (ob !== null) {
+            // console.log(ob);
+            setUserInfo(ob);
+        }
+    }, []);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [userInfo, setUserInfo] = useState({
         id: "",
