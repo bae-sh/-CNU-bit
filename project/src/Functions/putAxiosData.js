@@ -4,6 +4,7 @@ const putAxiosData = (userInfo) => {
         .put(`http://localhost:4000/users/${userInfo["id"]}`, {
             id: userInfo["id"],
             password: userInfo["password"],
+            name: userInfo["name"],
             cash: userInfo["cash"],
             coin: userInfo["coin"],
         })

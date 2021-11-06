@@ -42,8 +42,11 @@ const Ranking = ({ userRanking, viewIdx }) => {
                                 <td>{medalImage(index + 1)}</td>
                                 <td>{userInfo.name}</td>
                                 <td>{changeText(String(userInfo.stock))}</td>
-                                <td>{`${changeText(
-                                    String(userInfo.stock / 500000000)
+                                <td>{`${String(
+                                    (
+                                        (userInfo.stock - 500000000) /
+                                        500000000
+                                    ).toFixed(3)
                                 )}%`}</td>
                             </Row>
                         );

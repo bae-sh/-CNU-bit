@@ -91,6 +91,7 @@ function Presenter({ userInfo, setUserInfo }) {
             const user = await fetchLogin(account);
             let curUserInfo = userInfo;
             curUserInfo["id"] = user["id"];
+            curUserInfo["password"] = user["password"];
             curUserInfo["cash"] = user["cash"];
             curUserInfo["name"] = user["name"];
             curUserInfo["coin"] = user["coin"];
@@ -125,7 +126,14 @@ function Presenter({ userInfo, setUserInfo }) {
                 <LoginButton color="#3c78c8" onClick={onSubmitAccount}>
                     로그인
                 </LoginButton>
-                <LoginButton color="#8E8E8E">회원가입</LoginButton>
+                <LoginButton
+                    color="#8E8E8E"
+                    onClick={() => {
+                        window.location.href = "/signup";
+                    }}
+                >
+                    회원가입
+                </LoginButton>
             </LoginBox>
         </LoginWrap>
     );
