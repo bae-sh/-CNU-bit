@@ -68,7 +68,7 @@ function getMyAsset(userInfo, coinData) {
         myAsset +=
             coin["trade_price"] *
             userInfo["coin"][`${coin["code"]}`]["quantity"];
-        return 0;
+        return "";
     });
     return myAsset;
 }
@@ -96,7 +96,7 @@ export default ({ userInfo, setUserInfo, coinData }) => {
 
         coinData.map((coin) => {
             coinPrices[coin["code"]] = coin["trade_price"];
-            return 0;
+            return "";
         });
 
         for (let i = 0; i < myCoin.length; i++) {

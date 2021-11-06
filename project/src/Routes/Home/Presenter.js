@@ -157,7 +157,7 @@ export default ({ userRanking, coinData }) => {
                                 </div>
                             );
                         }
-                        return 0;
+                        return "";
                     })}
                 </div>
             </DataContainer>

@@ -1,17 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import axios from "axios";
 import { useState, useEffect } from "react";
 const getUserInfo = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-        let ob = JSON.parse(localStorage.getItem("id"));
-        if (ob !== null) {
-            // console.log(ob);
-            setUserInfo(ob);
+        let id = localStorage.getItem("id");
+
+        if (id !== null) {
+            let curUserInfo = userInfo;
+            axios
+                .get(`http://localhost:4000/users/${id}`)
+                .then(function (response) {
+                    curUserInfo = response.data;
+                    setUserInfo(curUserInfo);
+                })
+                .catch(function (error) {
+                    console.log("실패");
+                });
         }
     }, []);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [userInfo, setUserInfo] = useState({
         id: "",
+        password: "",
         name: "",
         cash: 0,
         coin: {
