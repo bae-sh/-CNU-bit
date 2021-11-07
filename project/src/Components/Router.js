@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
+import React, { useEffect } from "react";
 import {
     BrowserRouter as Router,
     Route,
@@ -20,9 +20,11 @@ import getUserRanking from "../Functions/getUserRanking";
 import getUserInfo from "../Functions/getUserInfo";
 
 export default () => {
+    
     const userInfo = getUserInfo().userInfo;
     const setUserInfo = getUserInfo().setUserInfo;
     const userRanking = getUserRanking();
+    
     return (
         <Router>
             <Header userInfo={userInfo} />

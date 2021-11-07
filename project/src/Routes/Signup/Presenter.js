@@ -124,7 +124,7 @@ export default () => {
                     onChange={onChangeAccount}
                 ></TextField>
                 <LoginButton color="#F75467" onClick={onSubmitAccount}>
-                    회원가기 하기
+                    회원가입 하기
                 </LoginButton>
             </LoginBox>
         </LoginWrap>
