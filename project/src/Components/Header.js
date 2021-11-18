@@ -1,15 +1,17 @@
+// 헤더 부분을 담당 하는 js
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import resetData from "../Functions/resetData";
+// navList 종류에는 4가지가 존재
 const navList = [
     { path: "/MyStock", pathName: "myStock", name: "My자산" },
     { path: "/Coin", pathName: "coin", name: "코인" },
     { path: "/Ranking", pathName: "menual", name: "랭킹" },
     { path: "/Menual", pathName: "menual", name: "이용안내" },
 ];
-
+// 최상위 컴포넌트 Header
 const Header = styled.header`
     position: fixed;
     top: 0;
@@ -26,12 +28,12 @@ const Header = styled.header`
         width: 900px;
     }
 `;
-
+// 최상위 아래에 자식들을 flex주기위한 컴포넌트
 const FlexBox = styled.div`
     display: flex;
     align-items: center;
 `;
-
+// CNU bit 로고 컴포넌트
 const Logo = styled.div`
     font-size: 35px;
     font-family: "Arimo", sans-serif;
@@ -40,20 +42,20 @@ const Logo = styled.div`
     width: 200px;
     color: #3c78c8;
 `;
-
+// Global navigation bar로써 로고와 다른 div를 주었음
 const Gnb = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
 `;
-
+// Gnb 아래의 자식들을 담기위한 그룹
 const NavGroup = styled.div`
     display: flex;
     align-items: center;
     margin-left: 40px;
     margin-right: 300px;
 `;
-
+//  각각의 네비링크에 대한 컴포넌트
 const NavLink = styled.div`
     margin-left: 40px;
     font-weight: 800;
@@ -64,7 +66,7 @@ const NavLink = styled.div`
         border-bottom: 2px solid;
     }
 `;
-
+//로그인과 회원가입 버튼을 위한 컴포넌트
 const LoginBox = styled.div`
     display: flex;
     align-items: center;
@@ -83,6 +85,7 @@ export default withRouter((userInfo) => {
 
                     <Gnb>
                         <NavGroup>
+                            {/* navList에 존재하는 nav들을 map을 이용하여 반복 */}
                             {navList.map(({ path, name }, idx) => (
                                 <NavLink key={idx}>
                                     <Link to={path} onClick={() => {}}>
@@ -92,6 +95,7 @@ export default withRouter((userInfo) => {
                             ))}
                         </NavGroup>
 
+                        {/* 로그인 네비 부분 */}
                         <LoginBox>
                             <NavLink>
                                 <Link
@@ -107,6 +111,7 @@ export default withRouter((userInfo) => {
                             </NavLink>
                         </LoginBox>
 
+                        {/* 회원가입 네비 부분 */}
                         <LoginBox>
                             <NavLink>
                                 <Link to="/signup" onClick={() => {}}>

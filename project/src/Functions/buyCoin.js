@@ -1,3 +1,6 @@
+// 코인 구매 버튼을 눌렀을때 발생하는 event 함수
+// 매수 후에는 json을 변경 해야 하므로 putAxiosData를 import
+
 import putAxiosData from "./putAxiosData";
 const buyCoin = (
     amount,

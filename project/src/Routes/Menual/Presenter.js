@@ -1,3 +1,4 @@
+// 메뉴얼 파트를 담당하는 js
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import styled from "styled-components";
@@ -37,6 +38,7 @@ const Content = styled.div`
     }
 `;
 export default () => {
+    // 이용안내 방법을 나타냄.
     return (
         <div className="inner">
             <Main>

@@ -1,3 +1,5 @@
+// json server에서 유저의 정보를 받아오는 담당 js
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -5,7 +7,7 @@ const getUserInfo = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         let id = localStorage.getItem("id");
-
+        // id값이 존재하는경우 서버에서 정보를 받아옴
         if (id !== null) {
             let curUserInfo = userInfo;
             axios
@@ -19,6 +21,8 @@ const getUserInfo = () => {
                 });
         }
     }, []);
+    // 기본적인 default 값 초기화
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [userInfo, setUserInfo] = useState({
         id: "",

@@ -1,3 +1,4 @@
+// 데이터 정보를 초기화 해주는 함수
 const resetData = (userInfo) => {
     let curUserInfo = userInfo;
     curUserInfo["id"] = "";

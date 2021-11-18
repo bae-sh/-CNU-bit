@@ -1,3 +1,5 @@
+// 유저들의 랭킹을 받아오는 js
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 

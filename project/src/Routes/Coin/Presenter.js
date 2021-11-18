@@ -1,8 +1,11 @@
+// 코인 페이지를 담당하는 js
+
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import styled from "styled-components";
 import changeText from "../../Functions/changeText";
 import BuySellButton from "../../Components/BuySellButton";
+// 최상단 컴포넌트인 Main
 const Main = styled.div`
     background-color: #ffffff;
     width: 100%;
@@ -21,11 +24,12 @@ const Main = styled.div`
         margin: 40px 50px;
     }
 `;
+// Table 부분을 담당하는 컴포넌트
 const Table = styled.table`
     width: 100%;
     border: 1px solid #ededed;
 `;
-
+// 각각의 row 컴포넌트
 const Row = styled.tr`
     border-bottom: 1px solid #ededed;
     &:first-child {

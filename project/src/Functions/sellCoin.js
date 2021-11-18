@@ -1,3 +1,4 @@
+// 구매버튼을 눌렀을떄 발생하는 함수 매수 버튼과 동일한 로직
 import putAxiosData from "./putAxiosData";
 const sellCoin = (
     amount,

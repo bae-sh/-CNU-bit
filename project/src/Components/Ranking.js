@@ -1,13 +1,15 @@
+// 메인 페이지의 랭크 파트 담당 Js
 import styled from "styled-components";
 
 import medalImage from "../Functions/medalImage";
 import changeText from "../Functions/changeText";
+// 최상위 Table 컴포넌트
 const Table = styled.table`
     width: 100%;
     border: 1px solid #ededed;
     margin-top: 50px;
 `;
-
+// 각각의 등수 Row 에 대한 컴포넌트
 const Row = styled.tr`
     border-bottom: 1px solid #ededed;
     &:first-child {
@@ -23,6 +25,7 @@ const Row = styled.tr`
         vertical-align: middle;
     }
 `;
+// 현재 유저들의 Ranking을 메인 페이지에서 받아옴. view에 보여줄 갯수를 viewIdx로 받음
 const Ranking = ({ userRanking, viewIdx }) => {
     return (
         <Table>

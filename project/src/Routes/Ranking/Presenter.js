@@ -1,3 +1,5 @@
+// 랭킹 정보를 나타내는 페이지
+
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import styled from "styled-components";
@@ -26,6 +28,7 @@ const Main = styled.div`
         margin: 40px 50px;
     }
 `;
+// 메인 페이지에서 사용한 랭킹js를 재활용
 
 export default ({ userRanking }) => {
     return (

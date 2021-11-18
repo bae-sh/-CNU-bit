@@ -1,3 +1,5 @@
+// My자산 파트를 담당하는 js
+
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import styled from "styled-components";
@@ -61,7 +63,7 @@ const Row = styled.tr`
         }
     }
 `;
-
+// 나의 자산을 오브젝트로 정리
 function getMyAsset(userInfo, coinData) {
     var myAsset = userInfo["cash"];
     coinData.map((coin) => {
@@ -76,7 +78,7 @@ function getMyAsset(userInfo, coinData) {
 export default ({ userInfo, setUserInfo, coinData }) => {
     var myAsset = changeText(String(getMyAsset(userInfo, coinData)));
     const myCash = changeText(String(userInfo["cash"]));
-
+    //코인데이트 목록 정리
     const getMyCoin = () => {
         const result = [];
         const myCoin = Object.values(userInfo["coin"]);
@@ -98,7 +100,7 @@ export default ({ userInfo, setUserInfo, coinData }) => {
             coinPrices[coin["code"]] = coin["trade_price"];
             return "";
         });
-
+        // 코인에 대한 정보를 수집.
         for (let i = 0; i < myCoin.length; i++) {
             const coin = myCoin[i];
             const coinName = coin["name"];
@@ -109,6 +111,7 @@ export default ({ userInfo, setUserInfo, coinData }) => {
             const boughtAvgPrice = coin["boughtPrice"] / coin["quantity"];
             const rate = ((coinPrice / boughtAvgPrice - 1) * 100).toFixed(3);
 
+            // 수량이 0인경우 continue
             if (coin["quantity"] === 0) continue;
             result.push(
                 <Row rate={rate}>

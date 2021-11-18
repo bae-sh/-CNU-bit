@@ -1,3 +1,5 @@
+// 유저의 정보를 갱신해주는 js
+
 import axios from "axios";
 const putAxiosData = (userInfo) => {
     axios
