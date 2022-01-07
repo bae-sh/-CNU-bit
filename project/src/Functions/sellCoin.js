@@ -1,4 +1,5 @@
 // 구매버튼을 눌렀을떄 발생하는 함수 매수 버튼과 동일한 로직
+
 import putAxiosData from "./putAxiosData";
 const sellCoin = (
     amount,
@@ -16,6 +17,7 @@ const sellCoin = (
             `${coinName} 보유 수량(${curUserInfo["coin"][coinCode]["quantity"]})보다 많습니다.`
         );
     } else {
+        // 구매가 가능할떄 발생하는 로직
         curUserInfo["cash"] += coinPrice * amount;
         curUserInfo["coin"][coinCode]["boughtPrice"] -=
             (curUserInfo["coin"][coinCode]["boughtPrice"] /

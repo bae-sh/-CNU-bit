@@ -64,6 +64,7 @@ export default ({ userInfo, setUserInfo, coinData }) => (
         <Main>
             <h1>코인</h1>
             <hr></hr>
+            {/* 현재 보유 현금을 나타내는 부분 */}
             <h2>{`My현금 : ${changeText(String(userInfo["cash"]))} 원`}</h2>
             <Table>
                 <thead>
@@ -77,6 +78,7 @@ export default ({ userInfo, setUserInfo, coinData }) => (
                         <th>매도</th>
                     </Row>
                 </thead>
+                {/* Container에서 받아온 coinData로 현재 가격을 나타내는 부분 */}
                 <tbody>
                     {coinData.map((coin, idx) => {
                         const coinName = coin["korean_name"];

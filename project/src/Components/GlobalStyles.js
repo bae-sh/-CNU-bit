@@ -1,8 +1,10 @@
+// 전체적으로 공통 css를 적용시키기 위한 Js
+
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
-    ${reset}
+    ${reset} // 초기화 진행
 
     * {
         box-sizing: border-box;// 모든 box들을 box의 내부로 사용

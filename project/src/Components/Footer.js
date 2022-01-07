@@ -30,6 +30,7 @@ const Content = styled.p`
     line-height: 1.3;
 `;
 
+// 이미지는 img 폴더에서 가져옴
 export default () => (
     <Footer>
         <Inner className="inner">

@@ -130,6 +130,7 @@ function Presenter({ userInfo, setUserInfo }) {
                 <LoginButton color="#3c78c8" onClick={onSubmitAccount}>
                     로그인
                 </LoginButton>
+                {/* 회원가입 버튼 클릭시 라우터 이동*/}
                 <LoginButton
                     color="#8E8E8E"
                     onClick={() => {

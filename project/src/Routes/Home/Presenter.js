@@ -109,10 +109,12 @@ const CoinData = styled.div`
 export default ({ userRanking, coinData }) => {
     return (
         <Main>
+            {/* 메인 이미지를 담당하는 컴포넌트 */}
             <MainContainer>
                 <MainImg src={homeImg} />
             </MainContainer>
 
+            {/* 코인 데이터를 나타내 주는 컴포넌트 */}
             <DataContainer>
                 <div className="inner">
                     {coinData.map((coin, idx) => {
@@ -122,6 +124,7 @@ export default ({ userRanking, coinData }) => {
                         );
                         const coinPrice = coin["trade_price"];
                         const change_price = coin["change_price"];
+                        // 4개의 데이터를 표현
                         if (idx < 4) {
                             return (
                                 <div key={idx}>
@@ -162,7 +165,7 @@ export default ({ userRanking, coinData }) => {
                     })}
                 </div>
             </DataContainer>
-
+            {/* 랭킹 부분을 나타내는 컴포넌트 */}
             <div className="inner">
                 <NoticeBox>
                     <Ranking userRanking={userRanking} viewIdx={5} />

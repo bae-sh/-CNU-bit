@@ -113,6 +113,7 @@ export default ({ userInfo, setUserInfo, coinData }) => {
 
             // 수량이 0인경우 continue
             if (coin["quantity"] === 0) continue;
+            // result에 모두 담고 한번에 뿌리는 방식
             result.push(
                 <Row rate={rate}>
                     <td>{coinName}</td>

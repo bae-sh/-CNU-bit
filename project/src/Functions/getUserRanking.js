@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+// 이번에도 json server에서 유저 정보를 받아온후 정렬
 const getData = async (setUserRanking) => {
     await axios
         .get(`http://localhost:4000/users`)
@@ -28,6 +29,7 @@ const getUserRanking = () => {
     }, []);
     return userRanking;
 };
+// 총 자산이 큰순으로 정렬
 const getUserData = (datas) => {
     let temp = [];
     datas.map((data) => {

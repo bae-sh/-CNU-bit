@@ -26,6 +26,7 @@ const Row = styled.tr`
     }
 `;
 // 현재 유저들의 Ranking을 메인 페이지에서 받아옴. view에 보여줄 갯수를 viewIdx로 받음
+// 테이블 형식으로 랭킹을 구성
 const Ranking = ({ userRanking, viewIdx }) => {
     return (
         <Table>
@@ -38,6 +39,7 @@ const Ranking = ({ userRanking, viewIdx }) => {
                 </Row>
             </thead>
             <tbody>
+                {/* 각각의 유저들을 보여주는 부분. 수익률 부분을 소수점 3자리로 나타냄. 기본적으로 제공되는 돈이 5억이므로 수익률 계산은 5억에서 얼마나 증가했는지 계산 */}
                 {userRanking.map((userInfo, index) => {
                     if (viewIdx === 0 || index < viewIdx) {
                         return (
@@ -54,7 +56,6 @@ const Ranking = ({ userRanking, viewIdx }) => {
                             </Row>
                         );
                     }
-                    return 0;
                 })}
             </tbody>
         </Table>
