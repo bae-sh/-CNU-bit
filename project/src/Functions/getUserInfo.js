@@ -3,27 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useState, useEffect } from "react";
-const getUserInfo = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-        let id = localStorage.getItem("id");
-        // id값이 존재하는경우 서버에서 정보를 받아옴
-        if (id !== null) {
-            let curUserInfo = userInfo;
-            axios
-                .get(`http://localhost:4000/users/${id}`)
-                .then(function (response) {
-                    curUserInfo = response.data;
-                    setUserInfo(curUserInfo);
-                })
-                .catch(function (error) {
-                    console.log("실패");
-                });
-        }
-    }, []);
-    // 기본적인 default 값 초기화
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+const useGetUserInfo = () => {
     const [userInfo, setUserInfo] = useState({
         id: "",
         password: "",
@@ -82,7 +62,25 @@ const getUserInfo = () => {
             },
         },
     });
+    useEffect(() => {
+        let id = localStorage.getItem("id");
+        // id값이 존재하는경우 서버에서 정보를 받아옴
+        if (id !== null) {
+            let curUserInfo = userInfo;
+            axios
+                .get(`http://localhost:4000/users/${id}`)
+                .then(function (response) {
+                    curUserInfo = response.data;
+                    setUserInfo(curUserInfo);
+                })
+                .catch(function (error) {
+                    console.log("실패");
+                });
+        }
+    }, []);
+    // 기본적인 default 값 초기화
+
     return { userInfo, setUserInfo };
 };
 
-export default getUserInfo;
+export const getUserInfo = useGetUserInfo;

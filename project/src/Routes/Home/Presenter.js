@@ -1,6 +1,6 @@
 // 메인 홈페이지를 담당하는 js
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import homeImg from "../../img/main.png";

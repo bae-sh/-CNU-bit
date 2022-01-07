@@ -78,9 +78,7 @@ export default withRouter((userInfo) => {
             <Header>
                 <FlexBox className="inner">
                     <Logo>
-                        <Link to="/" onClick={() => {}}>
-                            CNU bit
-                        </Link>
+                        <Link to="/">CNU bit</Link>
                     </Logo>
 
                     <Gnb>
@@ -88,9 +86,7 @@ export default withRouter((userInfo) => {
                             {/* navList에 존재하는 nav들을 map을 이용하여 반복 */}
                             {navList.map(({ path, name }, idx) => (
                                 <NavLink key={idx}>
-                                    <Link to={path} onClick={() => {}}>
-                                        {name}
-                                    </Link>
+                                    <Link to={path}>{name}</Link>
                                 </NavLink>
                             ))}
                         </NavGroup>
@@ -114,9 +110,7 @@ export default withRouter((userInfo) => {
                         {/* 회원가입 네비 부분 */}
                         <LoginBox>
                             <NavLink>
-                                <Link to="/signup" onClick={() => {}}>
-                                    회원가입
-                                </Link>
+                                <Link to="/signup">회원가입</Link>
                             </NavLink>
                         </LoginBox>
                     </Gnb>
