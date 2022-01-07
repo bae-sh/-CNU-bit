@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import postAxiosData from "../../Functions/postAxiosData";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const Logo = styled.div`
     font-size: 70px;
     font-family: "Arimo", sans-serif;
@@ -63,14 +64,13 @@ const LoginBox = styled.div`
     max-width: 400px;
     padding-bottom: 70px;
 `;
-// 출처 https://velog.io/@hoon_dev/%EB%A6%AC%EC%95%A1%ED%8A%B8-X-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-Redux-toolkit%EC%9C%BC%EB%A1%9C-%EA%B0%84%EB%8B%A8%ED%95%9C-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EB%B0%8F-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
 export default () => {
     //url 이동을 위한 useHistory
     const history = useHistory();
 
     //input에서 입력한 아이디와 비밀번호 정보를 담기위한 state
     const [account, setAccount] = useState({
-        id: "",
+        email: "",
         password: "",
         name: "",
     });
@@ -91,7 +91,7 @@ export default () => {
         let pwdPattern =
             /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
         if (
-            idPattern.test(account["id"]) &&
+            idPattern.test(account["email"]) &&
             pwdPattern.test(account["password"])
         ) {
             try {
@@ -105,13 +105,24 @@ export default () => {
             alert("아이디 또는 패스워드의 입력양식을 체크해주세요.");
         }
     };
+    const onSubmit = async () => {
+        try {
+            let data;
+            const { email, password } = account;
+            const auth = getAuth();
+            data = await createUserWithEmailAndPassword(auth, email, password);
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <LoginWrap>
             <LoginBox>
                 <Logo>CNU bit</Logo>
                 <TextField
-                    name="id"
-                    placeholder={"아이디"}
+                    name="email"
+                    placeholder={"이메일"}
                     onChange={onChangeAccount}
                 ></TextField>
                 <TextField
@@ -125,7 +136,7 @@ export default () => {
                     placeholder={"비밀번호"}
                     onChange={onChangeAccount}
                 ></TextField>
-                <LoginButton color="#F75467" onClick={onSubmitAccount}>
+                <LoginButton color="#F75467" onClick={onSubmit}>
                     회원가입 하기
                 </LoginButton>
             </LoginBox>
