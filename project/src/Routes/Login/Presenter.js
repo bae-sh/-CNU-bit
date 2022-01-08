@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { fetchLogin } from "../../Functions/fetchLogin";
 import { useHistory } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 const Logo = styled.div`
     font-size: 70px;
     font-family: "Arimo", sans-serif;
@@ -67,13 +68,13 @@ const LoginBox = styled.div`
     padding-bottom: 70px;
 `;
 
-function Presenter({ userInfo, setUserInfo }) {
+const Presenter = () => {
     //url 이동을 위한 useHistory
     const history = useHistory();
 
     //input에서 입력한 아이디와 비밀번호 정보를 담기위한 state
     const [account, setAccount] = useState({
-        id: "",
+        email: "",
         password: "",
     });
 
@@ -89,19 +90,21 @@ function Presenter({ userInfo, setUserInfo }) {
     };
     //동기식으로 로그인정보를 통신하여 출력
     const onSubmitAccount = async () => {
+        const { email, password } = account;
         try {
-            const user = await fetchLogin(account);
-            let curUserInfo = userInfo;
-            curUserInfo["id"] = user["id"];
-            curUserInfo["password"] = user["password"];
-            curUserInfo["cash"] = user["cash"];
-            curUserInfo["name"] = user["name"];
-            curUserInfo["coin"] = user["coin"];
-            //성공하면 해당 user 아이디 패스워드값 셋팅
-            setUserInfo(curUserInfo);
-            localStorage.setItem("id", curUserInfo["id"]);
-            //성공하면 해당 url로 이동(main페이지로)
-            history.replace("/");
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    history.push("/");
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode);
+                    console.log(errorMessage);
+                });
         } catch (error) {
             //실패하면 throw new Error("") 값 출력
             window.alert(error);
@@ -109,13 +112,12 @@ function Presenter({ userInfo, setUserInfo }) {
     };
     return (
         <LoginWrap>
-            {/* {console.log(userInfo)} */}
             <LoginBox>
                 <Logo>CNU bit</Logo>
                 <TextField
                     placeholder={"이메일"}
-                    id="id"
-                    name="id"
+                    email="email"
+                    name="email"
                     onChange={onChangeAccount}
                 ></TextField>
                 <TextField
@@ -132,7 +134,7 @@ function Presenter({ userInfo, setUserInfo }) {
                 <LoginButton
                     color="#8E8E8E"
                     onClick={() => {
-                        window.location.href = "/signup";
+                        history.push("/signup");
                     }}
                 >
                     회원가입
@@ -140,6 +142,6 @@ function Presenter({ userInfo, setUserInfo }) {
             </LoginBox>
         </LoginWrap>
     );
-}
+};
 
 export default Presenter;

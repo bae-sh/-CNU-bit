@@ -1,9 +1,10 @@
 // 헤더 부분을 담당 하는 js
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import resetData from "../Functions/resetData";
+import { getAuth, signOut } from "firebase/auth";
+
 // navList 종류에는 4가지가 존재
 const navList = [
     { path: "/MyStock", pathName: "myStock", name: "My자산" },
@@ -72,7 +73,20 @@ const LoginBox = styled.div`
     align-items: center;
 `;
 
-export default withRouter((userInfo) => {
+export default ({ userInfo, isLoggedIn, setIsLoggedIn }) => {
+    const tapLogin = () => {
+        const auth = getAuth();
+        if (auth.currentUser) {
+            signOut(auth)
+                .then(() => {
+                    // Sign-out successful.
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
+
     return (
         <>
             <Header>
@@ -94,15 +108,8 @@ export default withRouter((userInfo) => {
                         {/* 로그인 네비 부분 */}
                         <LoginBox>
                             <NavLink>
-                                <Link
-                                    to="/login"
-                                    onClick={() => {
-                                        resetData(userInfo.userInfo);
-                                    }}
-                                >
-                                    {userInfo.userInfo["id"] === ""
-                                        ? `로그인`
-                                        : `로그아웃`}
+                                <Link to="/login" onClick={tapLogin}>
+                                    {isLoggedIn ? `로그아웃` : `로그인`}
                                 </Link>
                             </NavLink>
                         </LoginBox>
@@ -118,4 +125,4 @@ export default withRouter((userInfo) => {
             </Header>
         </>
     );
-});
+};

@@ -85,33 +85,12 @@ export default () => {
             [e.target.name]: e.target.value,
         });
     };
-    //정규식을 이용해 올바른 형식인지 확인
-    const onSubmitAccount = async () => {
-        let idPattern = /^([A-Za-z0-9]){6,15}$/;
-        let pwdPattern =
-            /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-        if (
-            idPattern.test(account["email"]) &&
-            pwdPattern.test(account["password"])
-        ) {
-            try {
-                await postAxiosData(account);
-                history.replace("/");
-            } catch (error) {
-                //실패하면 throw new Error("") 값 출력
-                window.alert(error);
-            }
-        } else {
-            alert("아이디 또는 패스워드의 입력양식을 체크해주세요.");
-        }
-    };
     const onSubmit = async () => {
         try {
-            let data;
             const { email, password } = account;
             const auth = getAuth();
-            data = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(data);
+            await createUserWithEmailAndPassword(auth, email, password);
+            history.push("/");
         } catch (error) {
             console.log(error);
         }

@@ -22,13 +22,17 @@ import getUserRanking from "../Functions/getUserRanking";
 import { getUserInfo } from "../Functions/getUserInfo";
 // userInfo 는 getUserInfo 함수에서 가져옴
 // 유저 정보가 변할떄마다 state값을 변경해야 하므로 setUserInfo도 받아옴
-export default () => {
+export default ({ isLoggedIn, userObj, setIsLoggedIn }) => {
     const { userInfo, setUserInfo } = getUserInfo();
     const userRanking = getUserRanking();
     //  각각의 라우터를 구성하는 부분
     return (
         <Router>
-            <Header userInfo={userInfo} />
+            <Header
+                userInfo={userInfo}
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+            />
             <main>
                 <Switch>
                     <Route
