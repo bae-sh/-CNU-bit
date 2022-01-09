@@ -5,5 +5,5 @@
 import Container from "./Container";
 
 export default ({ userInfo, setUserInfo }) => (
-  <Container userInfo={userInfo} setUserInfo={setUserInfo} />
+    <Container userInfo={userInfo} setUserInfo={setUserInfo} />
 );

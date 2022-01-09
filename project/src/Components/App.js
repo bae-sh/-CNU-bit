@@ -10,7 +10,7 @@ import defaultObj from "../defaultObj";
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userObj, setUserObj] = useState(defaultObj);
-
+    const [count, setCount] = useState(0);
     useEffect(() => {
         authService.onAuthStateChanged((user) => {
             if (user) {
@@ -21,8 +21,10 @@ const App = () => {
                 setIsLoggedIn(false);
             }
         });
+        console.log(444);
     });
     useEffect(() => {
+        console.log(1);
         const updateFirestore = async () => {
             //userObj가 변경될때.
             const docRef = doc(dbService, "users", `${userObj.email}`);
@@ -50,6 +52,7 @@ const App = () => {
                 isLoggedIn={isLoggedIn}
                 userObj={userObj}
                 setUserObj={setUserObj}
+                setCount={setCount}
             />
             <Footer />
         </div>

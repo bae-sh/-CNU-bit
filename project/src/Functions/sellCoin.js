@@ -1,6 +1,5 @@
 // 구매버튼을 눌렀을떄 발생하는 함수 매수 버튼과 동일한 로직
 
-import putAxiosData from "./putAxiosData";
 const sellCoin = (
     amount,
     coinPrice,
@@ -9,7 +8,7 @@ const sellCoin = (
     setUserInfo,
     coinName
 ) => {
-    let curUserInfo = userInfo;
+    let curUserInfo = { ...userInfo };
     if (curUserInfo["id"] === "") {
         alert("로그인 후 이용할수 있습니다.");
     } else if (amount > curUserInfo["coin"][coinCode]["quantity"]) {
@@ -26,8 +25,6 @@ const sellCoin = (
         curUserInfo["coin"][coinCode]["quantity"] -= Number(amount);
         setUserInfo(curUserInfo);
         alert(`${coinName}을 ${amount}개 매도하였습니다. `);
-        putAxiosData(curUserInfo);
-        localStorage.setItem("id", curUserInfo["id"]);
     }
 };
 export default sellCoin;

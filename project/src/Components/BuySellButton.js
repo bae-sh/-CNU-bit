@@ -17,7 +17,8 @@ const BuySellButton = (
     coinCode,
     userInfo,
     setUserInfo,
-    coinName
+    coinName,
+    setCount
 ) => {
     return (
         <Button
@@ -29,7 +30,8 @@ const BuySellButton = (
                     coinCode,
                     userInfo,
                     setUserInfo,
-                    coinName
+                    coinName,
+                    setCount
                 );
             }}
         >
