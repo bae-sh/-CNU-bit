@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { getAuth, signOut } from "firebase/auth";
-
+import defaultObj from "../defaultObj";
 // navList 종류에는 4가지가 존재
 const navList = [
     { path: "/MyStock", pathName: "myStock", name: "My자산" },
@@ -73,13 +73,15 @@ const LoginBox = styled.div`
     align-items: center;
 `;
 
-export default ({ userInfo, isLoggedIn, setIsLoggedIn }) => {
+export default ({ isLoggedIn, setUserObj }) => {
     const tapLogin = () => {
         const auth = getAuth();
         if (auth.currentUser) {
             signOut(auth)
                 .then(() => {
                     // Sign-out successful.
+                    setUserObj(defaultObj);
+                    console.log(1);
                 })
                 .catch((error) => {
                     console.log(error);

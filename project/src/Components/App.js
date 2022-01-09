@@ -6,10 +6,10 @@ import GlobalStyles from "./GlobalStyles";
 import Footer from "./Footer";
 import { authService, dbService } from "../fbase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-
+import defaultObj from "../defaultObj";
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userObj, setUserObj] = useState();
+    const [userObj, setUserObj] = useState(defaultObj);
 
     useEffect(() => {
         authService.onAuthStateChanged((user) => {
@@ -29,24 +29,28 @@ const App = () => {
             await setDoc(docRef, userObj);
         };
         //mount될때 예외처리
-        if (userObj !== undefined) {
+        if (userObj.name !== "") {
             updateFirestore();
         }
     }, [userObj]);
     //isLoggedIn 일 경우만
     const getUserObj = async (user) => {
-        if (userObj === undefined) {
+        if (userObj.email === "") {
             const docRef = doc(dbService, "users", `${user.email}`);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                setUserObj(docSnap.data().userObj);
+                setUserObj(docSnap.data());
             }
         }
     };
     return (
         <div className="App">
             <GlobalStyles />
-            <Router isLoggedIn={isLoggedIn} userObj={userObj} />
+            <Router
+                isLoggedIn={isLoggedIn}
+                userObj={userObj}
+                setUserObj={setUserObj}
+            />
             <Footer />
         </div>
     );

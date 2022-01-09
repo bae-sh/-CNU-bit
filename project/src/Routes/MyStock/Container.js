@@ -16,6 +16,18 @@ const marketSelection = {
     "KRW-REP": "어거",
     "KRW-DOGE": "도지코인",
 };
+const coinPrices = {
+    "KRW-BTC": 0,
+    "KRW-ETH": 0,
+    "KRW-DOGE": 0,
+    "KRW-XRP": 0,
+    "KRW-LTC": 0,
+    "KRW-ETC": 0,
+    "KRW-QTUM": 0,
+    "KRW-STEEM": 0,
+    "KRW-ARDR": 0,
+    "KRW-REP": 0,
+};
 export default ({ userInfo, setUserInfo }) => {
     const coinList = getCoinDataList(marketSelection);
     return (
@@ -23,6 +35,7 @@ export default ({ userInfo, setUserInfo }) => {
             userInfo={userInfo}
             setUserInfo={setUserInfo}
             coinData={coinList}
+            coinPrices={coinPrices}
         />
     );
 };

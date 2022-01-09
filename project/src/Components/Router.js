@@ -19,16 +19,14 @@ import Ranking from "../Routes/Ranking";
 import Signup from "../Routes/Signup";
 
 import getUserRanking from "../Functions/getUserRanking";
-import { getUserInfo } from "../Functions/getUserInfo";
 // userInfo 는 getUserInfo 함수에서 가져옴
 // 유저 정보가 변할떄마다 state값을 변경해야 하므로 setUserInfo도 받아옴
-export default ({ isLoggedIn, userObj }) => {
-    const { userInfo, setUserInfo } = getUserInfo();
+export default ({ isLoggedIn, userObj, setUserObj }) => {
     const userRanking = getUserRanking();
     //  각각의 라우터를 구성하는 부분
     return (
         <Router>
-            <Header isLoggedIn={isLoggedIn} />
+            <Header isLoggedIn={isLoggedIn} setUserObj={setUserObj} />
             <main>
                 <Switch>
                     <Route
@@ -41,7 +39,7 @@ export default ({ isLoggedIn, userObj }) => {
                         render={() => (
                             <Login
                                 userInfo={userObj}
-                                setUserInfo={setUserInfo}
+                                setUserInfo={setUserObj}
                             />
                         )}
                         exact
@@ -51,7 +49,7 @@ export default ({ isLoggedIn, userObj }) => {
                         render={() => (
                             <Signup
                                 userInfo={userObj}
-                                setUserInfo={setUserInfo}
+                                setUserInfo={setUserObj}
                             />
                         )}
                         exact
@@ -61,7 +59,7 @@ export default ({ isLoggedIn, userObj }) => {
                         render={() => (
                             <MyStock
                                 userInfo={userObj}
-                                setUserInfo={setUserInfo}
+                                setUserInfo={setUserObj}
                             />
                         )}
                         exact
@@ -69,10 +67,7 @@ export default ({ isLoggedIn, userObj }) => {
                     <Route
                         path="/Coin"
                         render={() => (
-                            <Coin
-                                userInfo={userObj}
-                                setUserInfo={setUserInfo}
-                            />
+                            <Coin userInfo={userObj} setUserInfo={setUserObj} />
                         )}
                         exact
                     />

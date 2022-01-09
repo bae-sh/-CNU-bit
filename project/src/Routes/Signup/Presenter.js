@@ -66,7 +66,7 @@ const LoginBox = styled.div`
     max-width: 400px;
     padding-bottom: 70px;
 `;
-export default (userObj) => {
+export default ({ userObj }) => {
     //url 이동을 위한 useHistory
     const history = useHistory();
 
@@ -102,6 +102,7 @@ export default (userObj) => {
         const docRef = doc(dbService, "users", email);
         userObj.email = email;
         userObj.name = name;
+        userObj.cash = 500000000;
         await setDoc(docRef, userObj);
     };
     return (

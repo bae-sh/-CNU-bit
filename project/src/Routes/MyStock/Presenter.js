@@ -75,7 +75,7 @@ function getMyAsset(userInfo, coinData) {
     return myAsset;
 }
 
-export default ({ userInfo, setUserInfo, coinData }) => {
+export default ({ userInfo, setUserInfo, coinData, coinPrices }) => {
     var myAsset = changeText(String(getMyAsset(userInfo, coinData)));
     const myCash = changeText(String(userInfo["cash"]));
     //코인데이트 목록 정리
@@ -83,18 +83,6 @@ export default ({ userInfo, setUserInfo, coinData }) => {
         const result = [];
         const myCoin = Object.values(userInfo["coin"]);
         const myCoinCode = Object.keys(userInfo["coin"]);
-        const coinPrices = {
-            "KRW-BTC": 0,
-            "KRW-ETH": 0,
-            "KRW-DOGE": 0,
-            "KRW-XRP": 0,
-            "KRW-LTC": 0,
-            "KRW-ETC": 0,
-            "KRW-QTUM": 0,
-            "KRW-STEEM": 0,
-            "KRW-ARDR": 0,
-            "KRW-REP": 0,
-        };
 
         coinData.map((coin) => {
             coinPrices[coin["code"]] = coin["trade_price"];
