@@ -39,7 +39,6 @@ const Ranking = ({ userRanking, viewIdx }) => {
                 </Row>
             </thead>
             <tbody>
-                {/* 각각의 유저들을 보여주는 부분. 수익률 부분을 소수점 3자리로 나타냄. 기본적으로 제공되는 돈이 5억이므로 수익률 계산은 5억에서 얼마나 증가했는지 계산 */}
                 {userRanking.map((userInfo, index) => {
                     if (viewIdx === 0 || index < viewIdx) {
                         return (
@@ -56,6 +55,7 @@ const Ranking = ({ userRanking, viewIdx }) => {
                             </Row>
                         );
                     }
+                    return "";
                 })}
             </tbody>
         </Table>

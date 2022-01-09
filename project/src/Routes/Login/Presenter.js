@@ -3,7 +3,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useState } from "react";
 import styled from "styled-components";
-import { fetchLogin } from "../../Functions/fetchLogin";
 import { useHistory } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 const Logo = styled.div`
@@ -96,7 +95,7 @@ const Presenter = () => {
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Signed in
-                    const user = userCredential.user;
+                    // const user = userCredential.user;
                     history.push("/");
                 })
                 .catch((error) => {

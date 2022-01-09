@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import postAxiosData from "../../Functions/postAxiosData";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { dbService } from "../../fbase";
+import { doc, setDoc } from "firebase/firestore";
+
 const Logo = styled.div`
     font-size: 70px;
     font-family: "Arimo", sans-serif;
@@ -64,7 +66,7 @@ const LoginBox = styled.div`
     max-width: 400px;
     padding-bottom: 70px;
 `;
-export default () => {
+export default (userObj) => {
     //url 이동을 위한 useHistory
     const history = useHistory();
 
@@ -87,13 +89,20 @@ export default () => {
     };
     const onSubmit = async () => {
         try {
-            const { email, password } = account;
+            const { email, password, name } = account;
             const auth = getAuth();
             await createUserWithEmailAndPassword(auth, email, password);
+            setUserObjToFbase(email, name);
             history.push("/");
         } catch (error) {
             console.log(error);
         }
+    };
+    const setUserObjToFbase = async (email, name) => {
+        const docRef = doc(dbService, "users", email);
+        userObj.email = email;
+        userObj.name = name;
+        await setDoc(docRef, userObj);
     };
     return (
         <LoginWrap>
