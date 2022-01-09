@@ -106,7 +106,7 @@ const CoinData = styled.div`
     }
 `;
 
-export default ({ userRanking, coinData }) => {
+export default ({ coinData, usersData }) => {
     return (
         <Main>
             {/* 메인 이미지를 담당하는 컴포넌트 */}
@@ -168,7 +168,7 @@ export default ({ userRanking, coinData }) => {
             {/* 랭킹 부분을 나타내는 컴포넌트 */}
             <div className="inner">
                 <NoticeBox>
-                    <Ranking userRanking={userRanking} viewIdx={5} />
+                    <Ranking viewIdx={5} usersData={usersData} />
                 </NoticeBox>
             </div>
         </Main>

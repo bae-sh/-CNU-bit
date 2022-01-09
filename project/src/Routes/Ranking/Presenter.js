@@ -30,13 +30,13 @@ const Main = styled.div`
 `;
 // 메인 페이지에서 사용한 랭킹js를 재활용
 
-export default ({ userRanking }) => {
+export default ({ usersData }) => {
     return (
         <div className="inner">
             <Main>
                 <h1>랭킹</h1>
                 <hr></hr>
-                <Ranking userRanking={userRanking} viewIdx={0} />
+                <Ranking viewIdx={0} usersData={usersData} />
             </Main>
         </div>
     );

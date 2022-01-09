@@ -1,47 +1,41 @@
-// 유저들의 랭킹을 받아오는 js
+import getCoinDataList from "./getCoinDataList";
+import { marketSelection } from "../defaultObj";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
-
-// 이번에도 json server에서 유저 정보를 받아온후 정렬
-const getData = async (setUserRanking) => {
-    await axios
-        .get(`http://localhost:4000/users`)
-        .then(function (response) {
-            setUserRanking(getUserData(response.data));
-        })
-        .catch(function (error) {
-            console.log("실패");
+const getTotalStock = (userRanking) => {
+    const coinList = getCoinDataList(marketSelection);
+    let data = [];
+    if (userRanking.length !== undefined) {
+        data = userRanking.map((user) => {
+            let totalPrice = user.cash;
+            coinList.map((coin) => {
+                const code = coin.code;
+                const price = Number(coin["trade_price"]);
+                totalPrice += user.coin[code].quantity * price;
+                return "";
+            });
+            return { name: user.name, cash: totalPrice };
         });
-};
-const getUserRanking = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [userRanking, setUserRanking] = useState([
-        { stock: 500000000, name: "bae" },
-        { stock: 600000000, name: "bae2" },
-        { stock: 700000000, name: "bae3" },
-        { stock: 800000000, name: "bae4" },
-        { stock: 900000000, name: "bae5" },
-    ]);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-        getData(setUserRanking);
-    }, []);
-    return userRanking;
+    }
+    return data;
 };
 // 총 자산이 큰순으로 정렬
-const getUserData = (datas) => {
+const sortData = (datas) => {
     let temp = [];
-    datas.map((data) => {
-        temp.push({
-            stock: data["cash"],
-            name: data["name"],
+    if (datas.length !== undefined) {
+        temp = datas.map((data) => {
+            return {
+                stock: data["cash"],
+                name: data["name"],
+            };
         });
-        return "";
-    });
-    temp = temp.sort((a, b) => {
-        return b.stock - a.stock;
-    });
+        temp = temp.sort((a, b) => {
+            return b.stock - a.stock;
+        });
+    }
     return temp;
+};
+const getUserRanking = (usersData) => {
+    let data = getTotalStock(usersData);
+    return sortData(data);
 };
 export default getUserRanking;

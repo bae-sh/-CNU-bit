@@ -2,6 +2,5 @@
 
 /* eslint-disable import/no-anonymous-default-export */
 import Presenter from "./Presenter";
-import defaultObj from "../../defaultObj";
-console.log(defaultObj);
+import { defaultObj } from "../../defaultObj";
 export default () => <Presenter userObj={defaultObj} />;

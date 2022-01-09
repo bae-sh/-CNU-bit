@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import medalImage from "../Functions/medalImage";
 import changeText from "../Functions/changeText";
+import getUserRanking from "../Functions/getUserRanking";
 // 최상위 Table 컴포넌트
 const Table = styled.table`
     width: 100%;
@@ -27,7 +28,30 @@ const Row = styled.tr`
 `;
 // 현재 유저들의 Ranking을 메인 페이지에서 받아옴. view에 보여줄 갯수를 viewIdx로 받음
 // 테이블 형식으로 랭킹을 구성
-const Ranking = ({ userRanking, viewIdx }) => {
+const viewRanking = (viewIdx, usersData) => {
+    const userRanking = getUserRanking(usersData);
+    if (userRanking.length !== 0) {
+        return userRanking.map((userInfo, index) => {
+            if (viewIdx === 0 || index < viewIdx) {
+                return (
+                    <Row key={index}>
+                        <td>{medalImage(index + 1)}</td>
+                        <td>{userInfo.name}</td>
+                        <td>{changeText(String(userInfo.stock))}</td>
+                        <td>{`${String(
+                            (
+                                ((userInfo.stock - 500000000) / 500000000) *
+                                100
+                            ).toFixed(2)
+                        )}%`}</td>
+                    </Row>
+                );
+            }
+            return "";
+        });
+    }
+};
+const Ranking = ({ viewIdx, usersData }) => {
     return (
         <Table>
             <thead>
@@ -38,27 +62,7 @@ const Ranking = ({ userRanking, viewIdx }) => {
                     <th>수익률</th>
                 </Row>
             </thead>
-            <tbody>
-                {userRanking.map((userInfo, index) => {
-                    if (viewIdx === 0 || index < viewIdx) {
-                        return (
-                            <Row key={index}>
-                                <td>{medalImage(index + 1)}</td>
-                                <td>{userInfo.name}</td>
-                                <td>{changeText(String(userInfo.stock))}</td>
-                                <td>{`${String(
-                                    (
-                                        ((userInfo.stock - 500000000) /
-                                            500000000) *
-                                        100
-                                    ).toFixed(1)
-                                )}%`}</td>
-                            </Row>
-                        );
-                    }
-                    return "";
-                })}
-            </tbody>
+            <tbody>{viewRanking(viewIdx, usersData)}</tbody>
         </Table>
     );
 };

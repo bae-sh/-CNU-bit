@@ -6,25 +6,26 @@ import GlobalStyles from "./GlobalStyles";
 import Footer from "./Footer";
 import { authService, dbService } from "../fbase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import defaultObj from "../defaultObj";
+import { defaultObj } from "../defaultObj";
+import { collection, getDocs } from "firebase/firestore";
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userObj, setUserObj] = useState(defaultObj);
-    const [count, setCount] = useState(0);
+    const [usersData, setUsersData] = useState({});
     useEffect(() => {
         authService.onAuthStateChanged((user) => {
             if (user) {
                 setIsLoggedIn(true);
                 getUserObj(user);
-                console.log(userObj);
             } else {
                 setIsLoggedIn(false);
             }
         });
-        console.log(444);
     });
     useEffect(() => {
-        console.log(1);
+        getData();
+    }, []);
+    useEffect(() => {
         const updateFirestore = async () => {
             //userObj가 변경될때.
             const docRef = doc(dbService, "users", `${userObj.email}`);
@@ -45,6 +46,15 @@ const App = () => {
             }
         }
     };
+    const getData = async () => {
+        let userData = [];
+        const querySnapshot = await getDocs(collection(dbService, "users"));
+        querySnapshot.forEach((doc) => {
+            userData.push(doc.data());
+        });
+        setUsersData(userData);
+        return userData;
+    };
     return (
         <div className="App">
             <GlobalStyles />
@@ -52,7 +62,7 @@ const App = () => {
                 isLoggedIn={isLoggedIn}
                 userObj={userObj}
                 setUserObj={setUserObj}
-                setCount={setCount}
+                usersData={usersData}
             />
             <Footer />
         </div>

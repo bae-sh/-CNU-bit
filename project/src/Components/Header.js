@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { getAuth, signOut } from "firebase/auth";
-import defaultObj from "../defaultObj";
+import { defaultObj } from "../defaultObj";
 // navList 종류에는 4가지가 존재
 const navList = [
     { path: "/MyStock", pathName: "myStock", name: "My자산" },

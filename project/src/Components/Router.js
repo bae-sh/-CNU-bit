@@ -18,11 +18,9 @@ import Login from "../Routes/Login";
 import Ranking from "../Routes/Ranking";
 import Signup from "../Routes/Signup";
 
-import getUserRanking from "../Functions/getUserRanking";
-// userInfo 는 getUserInfo 함수에서 가져옴
-// 유저 정보가 변할떄마다 state값을 변경해야 하므로 setUserInfo도 받아옴
-export default ({ isLoggedIn, userObj, setUserObj }) => {
-    const userRanking = getUserRanking();
+export default ({ isLoggedIn, userObj, setUserObj, usersData }) => {
+    // const userRanking = getUserRanking();
+    const userRanking = [];
     //  각각의 라우터를 구성하는 부분
     return (
         <Router>
@@ -31,7 +29,7 @@ export default ({ isLoggedIn, userObj, setUserObj }) => {
                 <Switch>
                     <Route
                         path="/"
-                        render={() => <Home userRanking={userRanking} />}
+                        render={() => <Home usersData={usersData} />}
                         exact
                     />
                     <Route
@@ -73,7 +71,12 @@ export default ({ isLoggedIn, userObj, setUserObj }) => {
                     />
                     <Route
                         path="/Ranking"
-                        render={() => <Ranking userRanking={userRanking} />}
+                        render={() => (
+                            <Ranking
+                                userRanking={userRanking}
+                                usersData={usersData}
+                            />
+                        )}
                         exact
                     />
                     <Route path="/Menual" render={() => <Menual />} exact />
