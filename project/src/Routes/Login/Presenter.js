@@ -66,7 +66,9 @@ const LoginBox = styled.div`
     max-width: 350px;
     padding-bottom: 70px;
 `;
-
+const ErrorMessage = styled.p`
+    color: #ff0000;
+`;
 const Presenter = () => {
     //url 이동을 위한 useHistory
     const history = useHistory();
@@ -76,7 +78,7 @@ const Presenter = () => {
         email: "",
         password: "",
     });
-
+    const [message, setMessage] = useState("");
     //input에 입력하면 자동적으로 account state값 변경
     const onChangeAccount = (e) => {
         //...을 이용하여 account의 복사본을 만들고
@@ -99,10 +101,15 @@ const Presenter = () => {
                     history.push("/");
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log(errorCode);
-                    console.log(errorMessage);
+                    if (error.code === "auth/invalid-email") {
+                        setMessage("이메일 형식이 올바르지 않습니다.");
+                    } else if (error.code === "auth/internal-error") {
+                        setMessage("정보를 모두 입력해 주세요.");
+                    } else if (error.code === "auth/wrong-password") {
+                        setMessage("비밀번호가 올바르지 않습니다.");
+                    } else if (error.code === "auth/user-not-found") {
+                        setMessage("존재하지 않는 이메일 입니다.");
+                    }
                 });
         } catch (error) {
             //실패하면 throw new Error("") 값 출력
@@ -126,6 +133,7 @@ const Presenter = () => {
                     name="password"
                     onChange={onChangeAccount}
                 ></TextField>
+                <ErrorMessage>{message}</ErrorMessage>
                 <LoginButton color="#3c78c8" onClick={onSubmitAccount}>
                     로그인
                 </LoginButton>

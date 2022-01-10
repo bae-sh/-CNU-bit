@@ -66,6 +66,9 @@ const LoginBox = styled.div`
     max-width: 400px;
     padding-bottom: 70px;
 `;
+const ErrorMessage = styled.p`
+    color: #ff0000;
+`;
 export default ({ userObj }) => {
     //url 이동을 위한 useHistory
     const history = useHistory();
@@ -76,7 +79,7 @@ export default ({ userObj }) => {
         password: "",
         name: "",
     });
-
+    const [message, setMessage] = useState("");
     //input에 입력하면 자동적으로 account state값 변경
     const onChangeAccount = (e) => {
         //...을 이용하여 account의 복사본을 만들고
@@ -95,7 +98,15 @@ export default ({ userObj }) => {
             setUserObjToFbase(email, name);
             history.push("/");
         } catch (error) {
-            console.log(error);
+            if (error.code === "auth/email-already-in-use") {
+                setMessage("이미 존재하는 이메일 입니다.");
+            } else if (error.code === "auth/invalid-email") {
+                setMessage("이메일 형식이 올바르지 않습니다.");
+            } else if (error.code === "auth/internal-error") {
+                setMessage("정보를 모두 입력해 주세요.");
+            } else if (error.code === "auth/weak-password") {
+                setMessage("비밀번호를 6자 이상 입력해 주세요.");
+            }
         }
     };
     const setUserObjToFbase = async (email, name) => {
@@ -125,6 +136,7 @@ export default ({ userObj }) => {
                     placeholder={"비밀번호"}
                     onChange={onChangeAccount}
                 ></TextField>
+                <ErrorMessage>{message}</ErrorMessage>
                 <LoginButton color="#F75467" onClick={onSubmit}>
                     회원가입 하기
                 </LoginButton>

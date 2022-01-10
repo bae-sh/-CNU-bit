@@ -29,19 +29,9 @@ const Main = styled.div`
         margin: 40px 50px;
     }
 `;
-const Table = styled.table`
-    width: 100%;
-    border: 1px solid #ededed;
-`;
 
 const Row = styled.tr`
     border-bottom: 1px solid #ededed;
-    &:first-child {
-        background-color: #f9f9f9;
-        & > th {
-            padding: 20px;
-        }
-    }
     & > td {
         padding: 15px;
         font-size: 15px;
@@ -60,6 +50,16 @@ const Row = styled.tr`
         }
         &:first-child {
             font-weight: 500;
+        }
+    }
+`;
+const Table = styled.table`
+    width: 100%;
+    border: 1px solid #ededed;
+    & > thead > tr {
+        background-color: #f9f9f9;
+        & > th {
+            padding: 20px;
         }
     }
 `;
