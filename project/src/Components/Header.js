@@ -40,7 +40,7 @@ const Logo = styled.div`
     font-family: "Arimo", sans-serif;
     font-weight: 900;
     font-style: italic;
-    width: 200px;
+    width: 150px;
     color: #3c78c8;
 `;
 // Global navigation bar로써 로고와 다른 div를 주었음
@@ -54,7 +54,13 @@ const NavGroup = styled.div`
     display: flex;
     align-items: center;
     margin-left: 40px;
-    margin-right: 300px;
+    margin-right: 35%;
+    @media only screen and (max-width: 1200px) {
+        margin-right: 0;
+    }
+    /* @media only screen and (max-width: 1200px) {
+        margin-right: 30%;
+    } */
 `;
 //  각각의 네비링크에 대한 컴포넌트
 const NavLink = styled.div`
@@ -88,7 +94,7 @@ export default ({ isLoggedIn, setUserObj }) => {
                 });
         }
     };
-
+    console.log();
     return (
         <>
             <Header>
