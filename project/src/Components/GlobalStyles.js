@@ -8,10 +8,11 @@ const GlobalStyles = createGlobalStyle`
 
     * {
         box-sizing: border-box;// 모든 box들을 box의 내부로 사용
+        font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
     body {
-        font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        
         font-size: 16px;
 
         @media only screen and (max-width: 1000px) {
