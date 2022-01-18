@@ -27,6 +27,9 @@ const Main = styled.div`
         font-weight: 500;
         margin: 40px 50px;
     }
+    .scroll {
+        overflow: auto;
+    }
 `;
 // 메인 페이지에서 사용한 랭킹js를 재활용
 
@@ -36,7 +39,9 @@ export default ({ usersData }) => {
             <Main>
                 <h1>랭킹</h1>
                 <hr></hr>
-                <Ranking viewIdx={0} usersData={usersData} />
+                <div className="scroll">
+                    <Ranking viewIdx={0} usersData={usersData} />
+                </div>
             </Main>
         </div>
     );

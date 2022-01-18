@@ -10,23 +10,28 @@ const Main = styled.div`
     background-color: #ffffff;
     width: 100%;
     margin: auto;
-    flex: 1;
-    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    padding: 8%;
 
-    & > h1 {
+    h1 {
         font-size: 40px;
         font-weight: 600;
-        margin-bottom: 20px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #dbdbdb;
     }
-    & > h2 {
+    h2 {
         font-size: 35px;
         font-weight: 600;
         margin: 40px 50px;
     }
-    & > h3 {
+    h3 {
         font-size: 30px;
         font-weight: 500;
         margin: 40px 50px;
+    }
+    .scroll {
+        overflow: scroll;
     }
 `;
 
@@ -56,12 +61,13 @@ const Row = styled.tr`
 const Table = styled.table`
     width: 100%;
     border: 1px solid #ededed;
-    & > thead > tr {
+    thead > tr {
         background-color: #f9f9f9;
-        & > th {
+        th {
             padding: 20px;
         }
     }
+    overflow: auto;
 `;
 // 나의 자산을 오브젝트로 정리
 function getMyAsset(userInfo, coinData) {
@@ -145,25 +151,26 @@ export default ({ userInfo, setUserInfo, coinData, coinPrices }) => {
         <div className="inner">
             <Main>
                 <h1>My자산</h1>
-                <hr></hr>
                 <h2>My총자산 : {myAsset} 원</h2>
                 <h3>My현금 : {myCash}원</h3>
-                <Table>
-                    <thead>
-                        <Row>
-                            <th>코인</th>
-                            <th>실시간 시세</th>
-                            <th>매입가</th>
-                            <th>매입총액</th>
-                            <th>평가손익</th>
-                            <th>수익률</th>
-                            <th>수량</th>
-                            <th>매수</th>
-                            <th>매도</th>
-                        </Row>
-                    </thead>
-                    <tbody>{getMyCoin()}</tbody>
-                </Table>
+                <div className="scroll">
+                    <Table>
+                        <thead>
+                            <Row>
+                                <th>코인</th>
+                                <th>실시간 시세</th>
+                                <th>매입가</th>
+                                <th>매입총액</th>
+                                <th>평가손익</th>
+                                <th>수익률</th>
+                                <th>수량</th>
+                                <th>매수</th>
+                                <th>매도</th>
+                            </Row>
+                        </thead>
+                        <tbody>{getMyCoin()}</tbody>
+                    </Table>
+                </div>
             </Main>
         </div>
     );

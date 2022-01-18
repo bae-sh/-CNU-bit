@@ -10,9 +10,12 @@ const Main = styled.div`
     background-color: #ffffff;
     width: 100%;
     margin: auto;
-    flex: 1;
-    padding: 100px;
-
+    display: flex;
+    flex-direction: column;
+    padding: 8%;
+    @media screen and (max-width: 800px) {
+        justify-content: center;
+    }
     & > h1 {
         font-size: 40px;
         font-weight: 600;
@@ -22,6 +25,9 @@ const Main = styled.div`
         font-size: 35px;
         font-weight: 600;
         margin: 40px 50px;
+    }
+    .scroll {
+        overflow: scroll;
     }
 `;
 // Table 부분을 담당하는 컴포넌트
@@ -66,63 +72,67 @@ export default ({ userInfo, setUserInfo, coinData }) => (
             <hr></hr>
             {/* 현재 보유 현금을 나타내는 부분 */}
             <h2>{`My현금 : ${changeText(String(userInfo["cash"]))} 원`}</h2>
-            <Table>
-                <thead>
-                    <Row>
-                        <th>코인</th>
-                        <th>실시간 시세</th>
-                        <th>변동률</th>
-                        <th>고가</th>
-                        <th>저가</th>
-                        <th>매수</th>
-                        <th>매도</th>
-                    </Row>
-                </thead>
-                {/* Container에서 받아온 coinData로 현재 가격을 나타내는 부분 */}
-                <tbody>
-                    {coinData.map((coin, idx) => {
-                        const coinName = coin["korean_name"];
-                        const rate = coin["signed_change_rate"].toFixed(3);
-                        const coinPrice = coin["trade_price"];
-                        const coinCode = coin["code"];
-                        return (
-                            <Row rate={rate} key={idx}>
-                                <td>{coinName}</td>
-                                <td>{`${changeText(String(coinPrice))} 원`}</td>
-                                <td>{`${rate >= 0 ? `+` : `-`}${changeText(
-                                    String(coin["change_price"])
-                                )} 원(${rate > 0 ? `+` : ``}${rate}%)`}</td>
-                                <td>{`${changeText(
-                                    String(coin["high_price"])
-                                )} 원`}</td>
-                                <td>{`${changeText(
-                                    String(coin["low_price"])
-                                )} 원`}</td>
-                                <td>
-                                    {BuySellButton(
-                                        "buy",
-                                        coinPrice,
-                                        coinCode,
-                                        userInfo,
-                                        setUserInfo,
-                                        coinName
-                                    )}
-                                </td>
-                                <td>
-                                    {BuySellButton(
-                                        "sell",
-                                        coinPrice,
-                                        coinCode,
-                                        userInfo,
-                                        setUserInfo,
-                                        coinName
-                                    )}
-                                </td>
-                            </Row>
-                        );
-                    })}
-                </tbody>
-            </Table>
+            <div className="scroll">
+                <Table>
+                    <thead>
+                        <Row>
+                            <th>코인</th>
+                            <th>실시간 시세</th>
+                            <th>변동률</th>
+                            <th>고가</th>
+                            <th>저가</th>
+                            <th>매수</th>
+                            <th>매도</th>
+                        </Row>
+                    </thead>
+                    {/* Container에서 받아온 coinData로 현재 가격을 나타내는 부분 */}
+                    <tbody>
+                        {coinData.map((coin, idx) => {
+                            const coinName = coin["korean_name"];
+                            const rate = coin["signed_change_rate"].toFixed(3);
+                            const coinPrice = coin["trade_price"];
+                            const coinCode = coin["code"];
+                            return (
+                                <Row rate={rate} key={idx}>
+                                    <td>{coinName}</td>
+                                    <td>{`${changeText(
+                                        String(coinPrice)
+                                    )} 원`}</td>
+                                    <td>{`${rate >= 0 ? `+` : `-`}${changeText(
+                                        String(coin["change_price"])
+                                    )} 원(${rate > 0 ? `+` : ``}${rate}%)`}</td>
+                                    <td>{`${changeText(
+                                        String(coin["high_price"])
+                                    )} 원`}</td>
+                                    <td>{`${changeText(
+                                        String(coin["low_price"])
+                                    )} 원`}</td>
+                                    <td>
+                                        {BuySellButton(
+                                            "buy",
+                                            coinPrice,
+                                            coinCode,
+                                            userInfo,
+                                            setUserInfo,
+                                            coinName
+                                        )}
+                                    </td>
+                                    <td>
+                                        {BuySellButton(
+                                            "sell",
+                                            coinPrice,
+                                            coinCode,
+                                            userInfo,
+                                            setUserInfo,
+                                            coinName
+                                        )}
+                                    </td>
+                                </Row>
+                            );
+                        })}
+                    </tbody>
+                </Table>
+            </div>
         </Main>
     </div>
 );

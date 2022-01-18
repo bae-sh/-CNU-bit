@@ -13,17 +13,21 @@ const Table = styled.table`
 // 각각의 등수 Row 에 대한 컴포넌트
 const Row = styled.tr`
     border-bottom: 1px solid #ededed;
-    &:first-child {
+    th {
+        padding: 20px;
         background-color: #f9f9f9;
-        & > th {
-            padding: 20px;
-        }
     }
-    & > td {
+    td {
         padding: 15px;
         font-size: 17px;
         text-align: center;
         vertical-align: middle;
+    }
+    @media only screen and (max-width: 800px) {
+        th:nth-child(4),
+        td:nth-child(4) {
+            display: none;
+        }
     }
 `;
 // 현재 유저들의 Ranking을 메인 페이지에서 받아옴. view에 보여줄 갯수를 viewIdx로 받음
