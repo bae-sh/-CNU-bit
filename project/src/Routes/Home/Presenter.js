@@ -21,7 +21,7 @@ const MainContainer = styled.div`
 
 const MainImg = styled.img`
     width: 100%;
-    max-width: 1000px;
+    max-width: 900px;
     height: 500px;
     object-fit: cover;
     object-position: center;
@@ -34,12 +34,15 @@ const DataContainer = styled.div`
     width: 100%;
     background-color: #fff;
     margin-top: 30px;
+
     & > .inner {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-around;
         & > div {
             background-color: #feffff;
-            width: 450px;
+            width: 35%;
+            min-width: 350px;
             box-shadow: 0px 5px 15px -5px #000;
             padding: 40px;
             margin: 30px auto;
@@ -52,7 +55,6 @@ const DataContainer = styled.div`
             align-items: center;
 
             & > div {
-                max-width: 500px;
                 padding: 30px 20px;
 
                 & > h3 {
@@ -82,12 +84,12 @@ const DataBox = styled.div`
 `;
 
 const CoinName = styled.div`
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 500;
     margin-bottom: 10px;
 `;
 const CoinData = styled.div`
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 450;
     color: ${({ current }) => (current ? "#d60000" : "#0062df")};
     margin: 30px 0;
@@ -98,7 +100,7 @@ const CoinData = styled.div`
         color: black;
     }
     & > span {
-        margin-left: 14px;
+        margin-left: 10px;
         & > text {
             font-size: 20px;
             margin-left: 5px;
